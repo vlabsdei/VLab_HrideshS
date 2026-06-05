@@ -1,0 +1,1260 @@
+/* You CSS goes in here */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+:root {
+    --bg: #F8FAFC;
+    --bg2: #FFFFFF;
+    --bg3: #F1F5F9;
+    --bg4: #E2E8F0;
+    --border: #D6DCE5;
+    --border2: #CBD5E1;
+    --t1: #1E293B;
+    --t2: #475569;
+    --t3: #94A3B8;
+    --blue: #2563EB;
+    --blue-l: #DBEAFE;
+    --blue-d: #1E40AF;
+    --green: #16A34A;
+    --green-l: #DCFCE7;
+    --yellow: #D97706;
+    --yellow-l: #FEF3C7;
+    --orange: #EA580C;
+    --orange-l: #FFEDD5;
+    --red: #DC2626;
+    --red-l: #FEE2E2;
+    --r: 10px;
+    --r-sm: 7px;
+    --shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 1px 2px rgba(0, 0, 0, .04);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, .12);
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg)
+}
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--t1);
+    font-size: clamp(11px, 1.1vw, 15px);
+    -webkit-font-smoothing: antialiased
+}
+
+/* ── HEADER ── */
+.hd {
+    height: clamp(42px, 5.5vh, 60px);
+    background: var(--bg2);
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 0.8vw, 14px);
+    padding: 0 clamp(10px, 1.5vw, 24px);
+    box-shadow: var(--shadow);
+    z-index: 60;
+    position: relative;
+    flex-shrink: 0
+}
+
+.hd-badge {
+    background: var(--blue);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    padding: 3px 9px;
+    border-radius: 4px;
+    text-transform: uppercase
+}
+
+.hd-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--t1)
+}
+
+.hd-sub {
+    font-size: 12px;
+    color: var(--t3);
+    margin-left: 2px
+}
+
+.hd-pill {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid;
+    transition: all .5s
+}
+
+.pill-ok {
+    background: var(--green-l);
+    color: var(--green);
+    border-color: #86EFAC
+}
+
+.pill-warn {
+    background: var(--yellow-l);
+    color: var(--yellow);
+    border-color: #FCD34D
+}
+
+.pill-hot {
+    background: var(--orange-l);
+    color: var(--orange);
+    border-color: #FDBA74
+}
+
+.pill-crit {
+    background: var(--red-l);
+    color: var(--red);
+    border-color: #FCA5A5
+}
+
+.pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor
+}
+
+.pill-warn .pill-dot,
+.pill-hot .pill-dot,
+.pill-crit .pill-dot {
+    animation: blink .9s infinite
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: .2
+    }
+}
+
+/* ── LAYOUT ── */
+.app {
+    display: flex;
+    height: calc(100vh - clamp(42px, 5.5vh, 60px));
+    overflow: hidden
+}
+
+/* Left control panel — fixed wide column */
+.left {
+    width: clamp(300px, 26vw, 440px);
+    flex-shrink: 0;
+    background: var(--bg2);
+    border-right: 1.5px solid var(--border);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden
+}
+
+/* ── LEFT PANEL ── */
+.sect {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+}
+
+.sect-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--t3)
+}
+
+/* Sliders */
+.sl-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.sl-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.sl-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--t1)
+}
+
+.sl-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--blue-d);
+    background: var(--blue-l);
+    padding: 4px 12px;
+    border-radius: 4px;
+    min-width: 90px;
+    text-align: right
+}
+
+.sl-limits {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--t3);
+    margin-top: 2px
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border2);
+    outline: none;
+    cursor: pointer
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--bg2);
+    border: 2px solid var(--blue);
+    box-shadow: 0 1px 4px rgba(37, 99, 235, .25);
+    transition: transform .15s
+}
+
+input[type=range]:hover::-webkit-slider-thumb {
+    transform: scale(1.18)
+}
+
+/* Toggle */
+.fan-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.fan-lbl {
+    font-size: 15px;
+    font-weight: 500
+}
+
+.tog {
+    display: flex;
+    background: var(--bg3);
+    border-radius: 20px;
+    padding: 3px;
+    gap: 2px;
+    border: 1px solid var(--border)
+}
+
+.tog-btn {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 7px 18px;
+    border-radius: 16px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--t3);
+    transition: all .2s;
+    font-family: 'IBM Plex Sans', sans-serif
+}
+
+.tog-btn.on {
+    background: var(--bg2);
+    color: var(--blue);
+    box-shadow: var(--shadow)
+}
+
+/* Scenario buttons */
+.sc-btn {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    cursor: pointer;
+    text-align: left;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--t1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all .2s
+}
+
+.sc-btn:hover {
+    border-color: var(--border2);
+    background: var(--bg4)
+}
+
+.sc-btn.on-paste {
+    border-color: rgba(234, 88, 12, .5) !important;
+    background: rgba(234, 88, 12, .06) !important;
+    color: var(--orange) !important
+}
+
+.sc-btn.on-hvac {
+    border-color: rgba(220, 38, 38, .5) !important;
+    background: rgba(220, 38, 38, .06) !important;
+    color: var(--red) !important
+}
+
+.sc-ico {
+    font-size: 20px;
+    width: 28px;
+    text-align: center
+}
+
+.sc-name {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.3
+}
+
+.sc-sub {
+    font-size: 13px;
+    color: var(--t3);
+    margin-top: 2px
+}
+
+.sc-btn.on-paste .sc-sub {
+    color: rgba(234, 88, 12, .7)
+}
+
+.sc-btn.on-hvac .sc-sub {
+    color: rgba(220, 38, 38, .7)
+}
+
+/* Calc button */
+.calc-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--r-sm);
+    border: 1.5px solid var(--blue);
+    background: var(--blue-l);
+    color: var(--blue-d);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all .2s
+}
+
+.calc-btn:hover {
+    background: #BFDBFE
+}
+
+.calc-btn.on {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue)
+}
+
+/* ── VIEWPORT — fixed narrow GPU column ── */
+.viewport {
+    flex: 1;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 48%, #FFFFFF 0%, #F8FAFC 55%, #EDF2F7 100%);
+    cursor: pointer;
+}
+
+/* Fine grid dots */
+.viewport::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #CBD5E1 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: .55;
+    pointer-events: none
+}
+
+/* Click hint */
+.click-hint {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, .95);
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-size: 12px;
+    color: var(--t2);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    box-shadow: var(--shadow-md);
+    z-index: 30;
+    pointer-events: none;
+    animation: hintbob 2.5s ease-in-out infinite;
+    transition: opacity .6s, transform .6s
+}
+
+@keyframes hintbob {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0)
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-4px)
+    }
+}
+
+.click-hint.gone {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px)
+}
+
+.hint-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, .4);
+    animation: hintping 1.5s infinite
+}
+
+@keyframes hintping {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, .4)
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(37, 99, 235, 0)
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0)
+    }
+}
+
+/* ══════════════════════════════════════
+   GPU ASSEMBLED VIEW (top-down)
+══════════════════════════════════════ */
+.gpu-scene {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* transform-origin: top left; REMOVED */
+    transform: translate(-50%, -50%) scale(var(--gs, 1));
+    user-select: none
+}
+
+/* The GPU card - top-down shroud view */
+.gpu-card {
+    width: 420px;
+    height: 180px;
+    border-radius: 14px;
+    background: linear-gradient(175deg, #3A3A3C 0%, #2C2C2E 60%, #242426 100%);
+    border: 1.5px solid #4A4A4C;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, .22), 0 6px 20px rgba(0, 0, 0, .16),
+        inset 0 1px 0 rgba(255, 255, 255, .06);
+    transition: box-shadow .5s
+}
+
+/* Brushed metal texture via repeating lines */
+.gpu-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 5px,
+            rgba(255, 255, 255, .013) 5px, rgba(255, 255, 255, .013) 6px);
+    pointer-events: none
+}
+
+/* Top edge highlight */
+.gpu-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .12) 30%, rgba(255, 255, 255, .12) 70%, transparent 100%);
+    pointer-events: none;
+    z-index: 2
+}
+
+/* Fan housing recesses */
+.fan-area {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    right: 14px;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around
+}
+
+.fan-housing {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #2A2A2A, #1A1A1A);
+    border: 2px solid #404040;
+    position: relative;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, .5), 0 2px 4px rgba(0, 0, 0, .3)
+}
+
+/* Housing ring detail */
+.fan-housing::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .04);
+    pointer-events: none
+}
+
+.fan-canvas-el {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    overflow: hidden
+}
+
+/* Card bottom edge label strip */
+.card-label-strip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 24px;
+    background: rgba(0, 0, 0, .25);
+    border-top: 1px solid rgba(255, 255, 255, .04);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 10px
+}
+
+.card-model {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, .3);
+    letter-spacing: .1em
+}
+
+/* Port indicators */
+.card-ports {
+    display: flex;
+    gap: 3px;
+    margin-left: auto
+}
+
+.port-block {
+    height: 10px;
+    border-radius: 1px;
+    background: #333;
+    border: 1px solid #444
+}
+
+/* ══════════════════════════════════════
+   GPU EXPLODED VIEW
+══════════════════════════════════════ */
+.exploded-scene {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 540px;
+    /* transform-origin: top left; REMOVED */
+    transform: translate(-50%, -50%) scale(var(--gs, 1));
+    display: block;
+    height: 560px;
+    overflow: visible;
+    z-index: 5;
+    pointer-events: none
+}
+
+.exp-layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top .75s cubic-bezier(.22, 1, .36, 1);
+    z-index: 2
+}
+
+/* Shroud is always the topmost layer during transition */
+#elShroud {
+    z-index: 10
+}
+
+#elHeatsink {
+    z-index: 5
+}
+
+#elPaste {
+    z-index: 4
+}
+
+#elDie {
+    z-index: 3
+}
+
+#elPCB {
+    z-index: 1
+}
+
+/* Layer label */
+.exp-lbl-wrap {
+    position: absolute;
+    left: calc(100% + 14px);
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity .5s;
+    white-space: nowrap;
+    pointer-events: none
+}
+
+.exp-lbl-line {
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+
+.exp-lbl-tick {
+    width: 18px;
+    height: 1.5px;
+    background: var(--border2)
+}
+
+.exp-lbl-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--t1)
+}
+
+.exp-lbl-role {
+    font-size: 11px;
+    color: var(--t3);
+    margin-top: 1px
+}
+
+.exp-layer.show-lbl .exp-lbl-wrap {
+    opacity: 1
+}
+
+/* — SHROUD LAYER — */
+.el-shroud-wrap {
+    width: 420px;
+    height: 180px;
+    background: linear-gradient(175deg, #3A3A3C 0%, #2C2C2E 60%, #242426 100%);
+    border-radius: 14px;
+    border: 1.5px solid #4A4A4C;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, .22), 0 6px 20px rgba(0, 0, 0, .16),
+        inset 0 1px 0 rgba(255, 255, 255, .06)
+}
+
+/* Brushed metal texture on exploded shroud */
+.el-shroud-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 5px,
+            rgba(255, 255, 255, .013) 5px, rgba(255, 255, 255, .013) 6px);
+    pointer-events: none
+}
+
+.shroud-fans {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    right: 14px;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around
+}
+
+/* Exploded shroud fan housings match the assembled view */
+.shroud-fan-housing {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #2A2A2A, #1A1A1A);
+    border: 2px solid #404040;
+    position: relative;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, .5), 0 2px 4px rgba(0, 0, 0, .3);
+    overflow: hidden
+}
+
+.shroud-fan-housing::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .04);
+    pointer-events: none
+}
+
+/* Label strip on exploded shroud */
+.exp-shroud-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 24px;
+    background: rgba(0, 0, 0, .25);
+    border-top: 1px solid rgba(255, 255, 255, .04);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 10px
+}
+
+/* — HEATSINK LAYER — */
+.el-heatsink-wrap {
+    width: 420px;
+    height: 56px;
+    position: relative
+}
+
+.hs-fins-row {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 2.5px;
+    perspective: 300px;
+    transform: perspective(300px) rotateX(0deg)
+}
+
+.hs-fin {
+    flex: 1;
+    height: 100%;
+    border-radius: 2px 2px 0 0;
+    background: linear-gradient(180deg, #B8C0C8 0%, #D8E0E8 40%, #C8D0D8 70%, #A8B0B8 100%);
+    transition: background .4s;
+    position: relative
+}
+
+.hs-fin:nth-child(even) {
+    background: linear-gradient(180deg, #C0C8D0 0%, #E0E8F0 40%, #D0D8E0 70%, #B0B8C0 100%)
+}
+
+/* Fin top highlight */
+.hs-fin::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, .4);
+    border-radius: 2px 2px 0 0
+}
+
+/* Base plate under fins */
+.hs-base {
+    width: 420px;
+    height: 10px;
+    background: linear-gradient(180deg, #A8B0B8, #9098A0);
+    border-radius: 0 0 3px 3px;
+    margin-top: -2px
+}
+
+/* Airflow streamlines canvas */
+#airflowCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 420px;
+    height: 56px;
+    border-radius: 4px;
+    overflow: hidden
+}
+
+/* — PASTE LAYER — */
+.el-paste-outer {
+    width: 200px;
+    height: 12px;
+    position: relative
+}
+
+.el-paste-track {
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    background: #E8E8D0;
+    border: 1px solid #C8C8B0;
+    overflow: hidden
+}
+
+/* — DIE LAYER — */
+.el-die-outer {
+    width: 200px;
+    height: 80px;
+    position: relative
+}
+
+/* Package (IHS / lid) */
+.die-package {
+    position: absolute;
+    inset: 0;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #9A9EA8 0%, #B4B8C2 40%, #A8ACB6 60%, #8C9098 100%);
+    border: 1.5px solid #808490;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .18), inset 0 1px 0 rgba(255, 255, 255, .3);
+    overflow: hidden
+}
+
+/* Package corner chamfers */
+.die-package::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, .06)
+}
+
+/* Substrate (inner die window) */
+.die-substrate {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 110px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+    border-radius: 4px;
+    border: 1.5px solid #2A2A3E;
+    overflow: hidden;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, .4)
+}
+
+/* Die cells */
+.die-cells {
+    position: absolute;
+    inset: 4px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1.5px
+}
+
+.die-cell {
+    border-radius: 1px;
+    transition: background .5s
+}
+
+/* Die temp label */
+.die-temp-lbl {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color .5s
+}
+
+/* — PCB LAYER — */
+.el-pcb-wrap {
+    width: 410px;
+    height: 66px;
+    background: linear-gradient(180deg, #1A5C35 0%, #14532D 100%);
+    border-radius: 8px;
+    border: 1px solid #1A6B3C;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .15)
+}
+
+.pcb-trace {
+    position: absolute;
+    background: rgba(255, 255, 255, .07)
+}
+
+.pcb-chip {
+    position: absolute;
+    background: #0F0F0F;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, .06)
+}
+
+.pcb-conn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 48px;
+    background: #2A2A2A;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center
+}
+
+.pcb-pin {
+    width: 16px;
+    height: 2.5px;
+    background: #555;
+    border-radius: 1px
+}
+
+/* ══════════════════════════════════════
+   HEAT PARTICLES CANVAS
+══════════════════════════════════════ */
+#heatCanvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%
+}
+
+#hvacOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(220, 38, 38, 0);
+    transition: background 1.2s;
+    pointer-events: none
+}
+
+/* ══════════════════════════════════════
+   CALCULATION OVERLAY
+══════════════════════════════════════ */
+#calcBox {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, .97);
+    border: 1.5px solid var(--border2);
+    border-radius: var(--r);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-lg);
+    min-width: 290px;
+    max-width: 90vw;
+    display: none;
+    z-index: 40;
+    backdrop-filter: blur(8px)
+}
+
+#calcBox.show {
+    display: block;
+    animation: slideup .3s ease
+}
+
+@keyframes slideup {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(12px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0)
+    }
+}
+
+.cb-title {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--blue);
+    margin-bottom: 10px
+}
+
+.cb-formula {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--t1);
+    background: var(--bg3);
+    padding: 10px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    line-height: 2
+}
+
+/* ══════════════════════════════════════
+   DASHBOARD
+══════════════════════════════════════ */
+.dashboard {
+    background: var(--bg2);
+    border-top: 1.5px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(10px, 1vw, 16px);
+    padding: clamp(14px, 1.8vh, 24px) clamp(16px, 1.8vw, 28px);
+    flex-shrink: 0
+}
+
+.dc {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 18px;
+    background: var(--bg3);
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    transition: background .5s, border-color .5s
+}
+
+.dc.warn {
+    background: var(--yellow-l);
+    border-color: #FCD34D
+}
+
+.dc.hot {
+    background: var(--orange-l);
+    border-color: #FDBA74
+}
+
+.dc.crit {
+    background: var(--red-l);
+    border-color: #FCA5A5
+}
+
+.dc.good {
+    background: var(--green-l);
+    border-color: #86EFAC
+}
+
+.dc-lbl {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--t3);
+    text-transform: uppercase;
+    letter-spacing: .06em
+}
+
+.dash-v {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(22px, 2.2vw, 36px);
+    font-weight: 500;
+    color: var(--t1);
+    line-height: 1.1;
+    transition: color .5s
+}
+
+.dc-unit {
+    font-size: 12px;
+    color: var(--t3)
+}
+
+.dc.warn .dash-v {
+    color: var(--yellow)
+}
+
+.dc.hot .dash-v {
+    color: var(--orange)
+}
+
+.dc.crit .dash-v {
+    color: var(--red)
+}
+
+.dc.good .dash-v {
+    color: var(--green)
+}
+
+.dc.warn .dc-lbl,
+.dc.warn .dc-unit {
+    color: var(--yellow)
+}
+
+.dc.hot .dc-lbl,
+.dc.hot .dc-unit {
+    color: var(--orange)
+}
+
+.dc.crit .dc-lbl,
+.dc.crit .dc-unit {
+    color: var(--red)
+}
+
+.dc.good .dc-lbl,
+.dc.good .dc-unit {
+    color: var(--green)
+}
+
+@media(max-width:900px) {
+    .dashboard {
+        grid-template-columns: repeat(4, 1fr)
+    }
+
+    .dash-v {
+        font-size: clamp(15px, 3.5vw, 20px)
+    }
+}
+
+/* ═══ MOBILE STACKED LAYOUT ═══ */
+@media(max-width:700px), (orientation:portrait) {
+    body {
+        font-size: clamp(12px, 3.5vw, 15px)
+    }
+
+    .app {
+        flex-direction: column-reverse
+    }
+
+    /* Panel becomes a horizontal scrollable strip at the bottom */
+    .left {
+        width: 100%;
+        max-height: 44vh;
+        border-right: none;
+        border-top: 1.5px solid var(--border);
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap
+    }
+
+    .sect {
+        min-width: 150px;
+        flex-shrink: 0;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        padding: 10px 12px;
+        gap: 8px
+    }
+
+    .sect-title {
+        font-size: 9px
+    }
+
+    .sl-name {
+        font-size: 11px
+    }
+
+    .sl-val {
+        font-size: 10px;
+        min-width: 50px
+    }
+
+    .sl-limits {
+        font-size: 9px
+    }
+
+    .sc-sub {
+        display: none
+    }
+
+    .sc-name {
+        font-size: 11px
+    }
+
+    .sc-btn {
+        padding: 6px 8px;
+        gap: 6px
+    }
+
+    .sc-ico {
+        font-size: 13px;
+        width: 18px
+    }
+
+    .calc-btn {
+        font-size: 11px;
+        padding: 7px 10px
+    }
+
+    .fan-lbl {
+        font-size: 11px
+    }
+
+    .tog-btn {
+        font-size: 10px;
+        padding: 3px 8px
+    }
+
+    /* Viewport fills remaining space */
+    .right {
+        flex: 1;
+        min-height: 0
+    }
+
+    /* Dashboard: 4 cols, bigger value font */
+    .dashboard {
+        grid-template-columns: repeat(4, 1fr);
+        padding: 6px 8px;
+        gap: 4px
+    }
+
+    .dash-v {
+        font-size: clamp(16px, 5vw, 22px)
+    }
+
+    .dc {
+        padding: 6px 8px
+    }
+
+    .dc-lbl {
+        font-size: 8px
+    }
+
+    .dc-unit {
+        font-size: 8px
+    }
+
+    /* Hide header subtitle on small screens */
+    .hd-sub {
+        display: none
+    }
+
+    .hd {
+        height: clamp(38px, 5vh, 52px)
+    }
+
+    .app {
+        height: calc(100vh - clamp(38px, 5vh, 52px))
+    }
+}

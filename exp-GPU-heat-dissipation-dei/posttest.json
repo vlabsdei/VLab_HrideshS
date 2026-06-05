@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 Given an ambient temperature of 25°C, a power draw of 300W, and a thermal resistance of 0.20 °C/W, what is the junction temperature?",
+      "answers": {
+        "a": "60°C",
+        "b": "75°C",
+        "c": "85°C",
+        "d": "100°C"
+      },
+      "explanations": {
+        "a": "Incorrect. This is only the temperature rise due to power dissipation.",
+        "b": "Incorrect. Check the calculation.",
+        "c": "Correct. Tj = 25 + (300 × 0.20) = 85°C.",
+        "d": "Incorrect. Check the calculation."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q2 What immediate effect does thermal paste degradation have in the simulation?",
+      "answers": {
+        "a": "Decreases ambient temperature",
+        "b": "Increases thermal resistance",
+        "c": "Reduces power draw",
+        "d": "Disables thermal throttling"
+      },
+      "explanations": {
+        "a": "Incorrect. Ambient temperature is unaffected.",
+        "b": "Correct. Degradation increases thermal resistance and reduces heat transfer efficiency.",
+        "c": "Incorrect. Power draw remains unchanged initially.",
+        "d": "Incorrect. Thermal throttling remains active."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q3 A server room is at 30°C and the cooling system has a thermal resistance of 0.10 °C/W. At what power draw will the GPU reach the 85°C throttling threshold?",
+      "answers": {
+        "a": "450W",
+        "b": "550W",
+        "c": "650W",
+        "d": "750W"
+      },
+      "explanations": {
+        "a": "Incorrect. This results in 75°C.",
+        "b": "Correct. 85 = 30 + (P × 0.10), therefore P = 550W.",
+        "c": "Incorrect. This exceeds the threshold.",
+        "d": "Incorrect. This greatly exceeds the threshold."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Q4 During an HVAC failure where ambient temperature rises to 40°C, what happens to junction temperature if power draw remains constant?",
+      "answers": {
+        "a": "It decreases slightly",
+        "b": "It remains unchanged",
+        "c": "It increases exponentially",
+        "d": "It increases by the same amount as the ambient increase"
+      },
+      "explanations": {
+        "a": "Incorrect. Junction temperature cannot decrease if ambient temperature rises.",
+        "b": "Incorrect. The baseline temperature increases.",
+        "c": "Incorrect. The relationship is linear.",
+        "d": "Correct. Any increase in ambient temperature directly increases junction temperature."
+      },
+      "correctAnswer": "d",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q5 When thermal throttling begins, what happens to GPU performance?",
+      "answers": {
+        "a": "Performance increases",
+        "b": "Performance remains unchanged",
+        "c": "Performance decreases due to reduced clock speeds",
+        "d": "The GPU shuts down immediately"
+      },
+      "explanations": {
+        "a": "Incorrect. Throttling reduces performance.",
+        "b": "Incorrect. Throttling lowers performance intentionally.",
+        "c": "Correct. Clock speeds are reduced to lower heat generation.",
+        "d": "Incorrect. Shutdown occurs only at much higher temperatures."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q6 A GPU consumes 400W, ambient temperature is 20°C, and junction temperature is 80°C. What is the thermal resistance?",
+      "answers": {
+        "a": "0.10 °C/W",
+        "b": "0.15 °C/W",
+        "c": "0.20 °C/W",
+        "d": "0.25 °C/W"
+      },
+      "explanations": {
+        "a": "Incorrect. This would result in 60°C.",
+        "b": "Correct. Rθ = (80 − 20) ÷ 400 = 0.15 °C/W.",
+        "c": "Incorrect. This would result in 100°C.",
+        "d": "Incorrect. Check the formula."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Q7 Which component provides the largest surface area for heat dissipation in a GPU cooling system?",
+      "answers": {
+        "a": "GPU Die",
+        "b": "Thermal Paste",
+        "c": "Heatsink",
+        "d": "Power Connector"
+      },
+      "explanations": {
+        "a": "Incorrect. The die generates heat.",
+        "b": "Incorrect. Thermal paste improves contact only.",
+        "c": "Correct. The heatsink's fins maximize heat transfer to air.",
+        "d": "Incorrect. Power connectors do not dissipate significant heat."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q8 If fan speed increases while all other parameters remain constant, what is the most likely outcome?",
+      "answers": {
+        "a": "Junction temperature increases",
+        "b": "Heat transfer improves and temperature decreases",
+        "c": "Ambient temperature decreases",
+        "d": "Power draw doubles"
+      },
+      "explanations": {
+        "a": "Incorrect. Increased airflow generally lowers temperature.",
+        "b": "Correct. Faster airflow removes heat more effectively.",
+        "c": "Incorrect. Ambient temperature is external.",
+        "d": "Incorrect. Fan speed does not double GPU power draw."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q9 In the heat transfer path shown in the simulation, which sequence is correct?",
+      "answers": {
+        "a": "Fan → PCB → Die → Air",
+        "b": "GPU Die → Thermal Paste → Heatsink → Air",
+        "c": "Air → Fan → Die → Thermal Paste",
+        "d": "PCB → Fan → Air → Heatsink"
+      },
+      "explanations": {
+        "a": "Incorrect. Heat originates in the die.",
+        "b": "Correct. This is the primary heat transfer path.",
+        "c": "Incorrect. Heat flows outward from the die.",
+        "d": "Incorrect. This sequence is physically incorrect."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q10 Why does degraded thermal paste increase GPU temperature?",
+      "answers": {
+        "a": "It increases fan speed",
+        "b": "It decreases ambient temperature",
+        "c": "It creates microscopic air gaps that reduce heat transfer efficiency",
+        "d": "It reduces GPU power consumption"
+      },
+      "explanations": {
+        "a": "Incorrect. Fan speed is controlled separately.",
+        "b": "Incorrect. Thermal paste does not affect ambient conditions.",
+        "c": "Correct. Air gaps act as thermal insulators and increase thermal resistance.",
+        "d": "Incorrect. Thermal paste does not directly affect power draw."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    }
+  ]
+}

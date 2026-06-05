@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 Why do electronic devices such as GPUs generate heat during operation?",
+      "answers": {
+        "a": "Because they consume electrical power",
+        "b": "Because they absorb heat from the monitor",
+        "c": "Because they are made of metal",
+        "d": "Because they contain cooling fans"
+      },
+      "explanations": {
+        "a": "Correct. Electrical energy is partially converted into heat during operation.",
+        "b": "Incorrect. Monitors do not significantly contribute to GPU heating.",
+        "c": "Incorrect. Material alone does not cause heating.",
+        "d": "Incorrect. Fans help remove heat rather than generate it."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q2 What is the primary purpose of a cooling system in a computer?",
+      "answers": {
+        "a": "To increase internet speed",
+        "b": "To reduce heat and maintain safe operation",
+        "c": "To increase storage capacity",
+        "d": "To improve display quality"
+      },
+      "explanations": {
+        "a": "Incorrect. Cooling systems do not affect network performance.",
+        "b": "Correct. Cooling systems remove excess heat and protect hardware.",
+        "c": "Incorrect. Cooling systems are unrelated to storage.",
+        "d": "Incorrect. Display quality is unaffected by cooling."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q3 Which component is primarily responsible for moving air through a GPU cooling system?",
+      "answers": {
+        "a": "Thermal Paste",
+        "b": "Cooling Fan",
+        "c": "Power Connector",
+        "d": "PCB"
+      },
+      "explanations": {
+        "a": "Incorrect. Thermal paste improves heat transfer between surfaces.",
+        "b": "Correct. Fans move air to help dissipate heat.",
+        "c": "Incorrect. Power connectors only provide electrical power.",
+        "d": "Incorrect. The PCB supports electronic components."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q4 What usually happens when a computer component becomes excessively hot?",
+      "answers": {
+        "a": "Performance may decrease",
+        "b": "It becomes more efficient",
+        "c": "It requires less cooling",
+        "d": "Nothing changes"
+      },
+      "explanations": {
+        "a": "Correct. High temperatures can reduce performance and reliability.",
+        "b": "Incorrect. Overheating does not improve efficiency.",
+        "c": "Incorrect. More cooling is typically required.",
+        "d": "Incorrect. Excessive heat affects operation."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q5 Which of the following activities is most likely to increase GPU temperature?",
+      "answers": {
+        "a": "Running graphics-intensive applications",
+        "b": "Turning off the monitor",
+        "c": "Reducing workload",
+        "d": "Increasing airflow"
+      },
+      "explanations": {
+        "a": "Correct. Higher workloads require more power and generate more heat.",
+        "b": "Incorrect. The monitor has little effect on GPU temperature.",
+        "c": "Incorrect. Lower workloads generally reduce temperature.",
+        "d": "Incorrect. Increased airflow helps cooling."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q6 Which of the following best describes heat transfer?",
+      "answers": {
+        "a": "The movement of thermal energy from a hotter region to a cooler region",
+        "b": "The movement of electricity through a wire",
+        "c": "The conversion of heat into light",
+        "d": "The storage of heat inside a battery"
+      },
+      "explanations": {
+        "a": "Correct. Heat naturally flows from higher temperature regions to lower temperature regions.",
+        "b": "Incorrect. This describes electrical current.",
+        "c": "Incorrect. This is not the definition of heat transfer.",
+        "d": "Incorrect. Batteries store chemical energy."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q7 Which environment would generally make cooling a computer more difficult?",
+      "answers": {
+        "a": "A cool air-conditioned room",
+        "b": "A room with strong airflow",
+        "c": "A hot room with poor ventilation",
+        "d": "An open laboratory"
+      },
+      "explanations": {
+        "a": "Incorrect. Cooler surroundings help cooling.",
+        "b": "Incorrect. Airflow assists heat removal.",
+        "c": "Correct. High ambient temperatures and poor airflow hinder cooling.",
+        "d": "Incorrect. Open spaces generally allow better heat dissipation."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q8 Why are heatsinks commonly used in electronic devices?",
+      "answers": {
+        "a": "To store electrical energy",
+        "b": "To increase the surface area available for heat dissipation",
+        "c": "To amplify electrical signals",
+        "d": "To improve wireless communication"
+      },
+      "explanations": {
+        "a": "Incorrect. Heatsinks do not store energy.",
+        "b": "Correct. More surface area helps transfer heat to the surrounding air.",
+        "c": "Incorrect. Signal amplification is performed by electronic circuits.",
+        "d": "Incorrect. Heatsinks do not affect wireless communication."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q9 What is the most likely consequence of insufficient cooling in a computer system?",
+      "answers": {
+        "a": "Improved performance",
+        "b": "Reduced heat generation",
+        "c": "Higher operating temperatures",
+        "d": "Lower power consumption"
+      },
+      "explanations": {
+        "a": "Incorrect. Poor cooling usually reduces performance.",
+        "b": "Incorrect. Heat generation depends mainly on workload and power consumption.",
+        "c": "Correct. Inadequate cooling causes temperatures to rise.",
+        "d": "Incorrect. Insufficient cooling does not directly lower power consumption."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q10 Which factor would most likely increase the temperature inside a server room?",
+      "answers": {
+        "a": "Improved ventilation",
+        "b": "Additional active computer systems",
+        "c": "Lower power consumption",
+        "d": "More efficient cooling systems"
+      },
+      "explanations": {
+        "a": "Incorrect. Ventilation helps remove heat.",
+        "b": "Correct. More operating systems generate additional heat.",
+        "c": "Incorrect. Lower power generally means less heat.",
+        "d": "Incorrect. Better cooling reduces temperature."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    }
+  ]
+}
