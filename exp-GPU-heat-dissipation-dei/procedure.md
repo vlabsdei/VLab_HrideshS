@@ -7,11 +7,11 @@
 
 | Parameter                       | Default Value     |
 | ------------------------------- | ----------------- |
-| Ambient Temperature ($T_a$)     | 25 °C             |
-| Power Draw ($P$)                | 300 W             |
-| Thermal Resistance ($R_\theta$) | 0.10 °C/W         |
+| Ambient Temperature (T<sub>a</sub>)     | 25 °C             |
+| Power Draw (P)                | 300 W             |
+| Thermal Resistance (R<sub>&theta;</sub>) | 0.10 °C/W         |
 | Fan Mode                        | Auto              |
-| Junction Temperature ($T_j$)    | Observe Dashboard |
+| Junction Temperature (T<sub>j</sub>)    | Observe Dashboard |
 
 4. Familiarize yourself with the control panel, dashboard, and visualization viewport.
 
@@ -31,7 +31,7 @@
 | GPU Die        | Primary heat source                       |
 | PCB            | Supports electronic circuitry             |
 
-4. Observe the labels and heat-flow indicators.
+4. Observe the labels.
 5. Return to the assembled view before proceeding.
 
 ---
@@ -75,7 +75,6 @@
 3. Observe changes in:
 
    * Junction Temperature
-   * Cooling Efficiency
    * Thermal Status
 
 4. Record your observations.
@@ -129,7 +128,6 @@
    * Changes in the appearance of the thermal paste layer
    * Increase in thermal resistance
    * Rise in junction temperature
-   * Changes in cooling efficiency
 
 4. Compare the results with the normal condition.
 
@@ -152,7 +150,7 @@
 
    * Increase in ambient temperature
    * Rise in junction temperature
-   * Reduction in cooling effectiveness
+  
 
 5. Record the resulting junction temperature.
 
@@ -160,7 +158,7 @@
 
 ## Step 8: Observe Thermal Throttling
 
-1. Increase the Power Draw until the GPU temperature exceeds **85 °C**.
+1. Increase the Power Draw until the GPU temperature .
 
 2. Observe the following:
 
@@ -179,7 +177,7 @@
 
 ## Step 9: Compare Different Cooling Conditions
 
-Complete the following comparison table:
+Reset the parameters and run the simulation for each of the following conditions. Complete the following comparison table:
 
 | Condition                 | Junction Temperature (°C) | Performance (%) | Thermal Status |
 | ------------------------- | ------------------------- | --------------- | -------------- |
@@ -194,15 +192,13 @@ Complete the following comparison table:
 
 Using the thermal equation:
 
-$$
-T_j = T_a + (P \times R_\theta)
-$$
+T<sub>j</sub>= T<sub>a</sub> + (P × R<sub>&theta;</sub>)
+
 
 1. Select any values for:
 
    * Ambient Temperature
    * Power Draw
-   * Thermal Resistance
 
 2. Calculate the Junction Temperature manually.
 
@@ -220,4 +216,4 @@ Record all measured values, trends, and notable changes observed during the expe
 
 # Result
 
-The effects of ambient temperature, power consumption, thermal resistance, thermal paste degradation, cooling efficiency, and thermal throttling on GPU thermal behavior were successfully studied. The experiment demonstrated the heat-transfer path from the GPU die to the surrounding environment and highlighted the importance of efficient thermal management in modern computing systems.
+The effects of ambient temperature, power consumption, thermal resistance, thermal paste degradation, and thermal throttling on GPU thermal behavior were successfully studied. The experiment demonstrated the heat-transfer path from the GPU die to the surrounding environment and highlighted the importance of efficient thermal management in modern computing systems.
