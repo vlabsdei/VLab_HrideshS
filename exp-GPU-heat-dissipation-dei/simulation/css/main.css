@@ -903,7 +903,7 @@ input[type=range]:hover::-webkit-slider-thumb {
 /* — PCB LAYER — */
 .el-pcb-wrap {
     width: 410px;
-    height: 66px;
+    height: 130px;
     background: linear-gradient(180deg, #1A5C35 0%, #14532D 100%);
     border-radius: 8px;
     border: 1px solid #1A6B3C;
