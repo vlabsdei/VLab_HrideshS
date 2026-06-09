@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 According to the experiment, what happens to outlet water temperature when coolant flow rate increases?",
+      "answers": {
+        "a": "It generally decreases",
+        "b": "It always increases",
+        "c": "It becomes zero",
+        "d": "It is unaffected"
+      },
+      "explanations": {
+        "a": "Correct. Higher flow rates carry heat away more effectively, resulting in a smaller temperature rise per unit of coolant.",
+        "b": "Incorrect. Increased flow generally reduces the coolant temperature rise.",
+        "c": "Incorrect. The outlet temperature cannot become zero under normal operating conditions.",
+        "d": "Incorrect. Flow rate directly influences coolant temperature behavior."
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q2 Which equation governs the heat absorbed by the coolant in this experiment?",
+      "answers": {
+        "a": "Q = R × I",
+        "b": "Q = ṁ × Cp × (T<sub>out</sub> − T<sub>in</sub>)",
+        "c": "F = ma",
+        "d": "P = IV"
+      },
+      "explanations": {
+        "a": "Incorrect. This equation relates to electrical power.",
+        "b": "Correct. This is the heat-transfer equation used to model coolant heat absorption.",
+        "c": "Incorrect. This is Newton's Second Law.",
+        "d": "Incorrect. This is the electrical power equation."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q3 What does Cp represent in the experiment?",
+      "answers": {
+        "a": "Coolant pressure",
+        "b": "Specific heat capacity",
+        "c": "Pump coefficient",
+        "d": "Cooling penalty"
+      },
+      "explanations": {
+        "a": "Incorrect. Pressure is represented separately.",
+        "b": "Correct. Cp is the amount of energy required to raise the temperature of a unit mass of coolant by one degree Celsius.",
+        "c": "Incorrect. Cp is unrelated to pump characteristics.",
+        "d": "Incorrect. There is no such parameter in the equation."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q4 What value is used for the specific heat capacity of water in the simulation?",
+      "answers": {
+        "a": "4184 J/(kg·°C)",
+        "b": "1000 J/(kg·°C)",
+        "c": "200 J/(kg·°C)",
+        "d": "50 J/(kg·°C)"
+      },
+      "explanations": {
+        "a": "Correct. Water has a high specific heat capacity of approximately 4184 J/(kg·°C).",
+        "b": "Incorrect. This value is too low for water.",
+        "c": "Incorrect. This is far below water's actual value.",
+        "d": "Incorrect. This value is unrealistic for water."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q5 Increasing coolant flow rate generally causes thermal resistance to:",
+      "answers": {
+        "a": "Increase",
+        "b": "Remain fixed",
+        "c": "Decrease",
+        "d": "Become infinite"
+      },
+      "explanations": {
+        "a": "Incorrect. Better coolant flow improves heat transfer.",
+        "b": "Incorrect. Thermal resistance changes with cooling conditions.",
+        "c": "Correct. Increasing flow rate generally lowers thermal resistance by improving convective heat transfer.",
+        "d": "Incorrect. Thermal resistance does not become infinite under normal operation."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q6 Why are there diminishing returns at very high coolant flow rates?",
+      "answers": {
+        "a": "Heat transfer becomes less sensitive to additional flow increases",
+        "b": "Water completely stops absorbing heat",
+        "c": "The GPU stops producing heat",
+        "d": "The coolant freezes"
+      },
+      "explanations": {
+        "a": "Correct. Beyond a certain point, increasing flow rate yields only small improvements in cooling performance.",
+        "b": "Incorrect. Water continues absorbing heat.",
+        "c": "Incorrect. GPU heat generation is determined by workload.",
+        "d": "Incorrect. Flow rate does not cause coolant freezing."
+      },
+      "correctAnswer": "a",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Q7 According to the experiment, approximately beyond what coolant flow rate do cooling improvements begin to show diminishing returns?",
+      "answers": {
+        "a": "0.5 LPM",
+        "b": "1.0 LPM",
+        "c": "2.0 LPM",
+        "d": "5.0 LPM"
+      },
+      "explanations": {
+        "a": "Incorrect. Significant improvements are still observed above this value.",
+        "b": "Incorrect. Cooling gains continue to be noticeable beyond this point.",
+        "c": "Correct. The experiment highlights diminishing returns beyond approximately 2.0 LPM.",
+        "d": "Incorrect. This value is outside the experiment's operating range."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q8 What is a major tradeoff associated with increasing coolant flow rate significantly?",
+      "answers": {
+        "a": "Lower cooling performance",
+        "b": "Higher cooling effectiveness but increased pumping energy and water usage",
+        "c": "Reduced coolant circulation",
+        "d": "Elimination of thermal resistance"
+      },
+      "explanations": {
+        "a": "Incorrect. Cooling performance generally improves.",
+        "b": "Correct. Better cooling comes at the cost of increased infrastructure demands and resource consumption.",
+        "c": "Incorrect. Flow rate increases circulation.",
+        "d": "Incorrect. Thermal resistance can be reduced but never completely eliminated."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q9 Which output parameter in the simulation directly reflects the environmental impact of the cooling system?",
+      "answers": {
+        "a": "GPU Heat Load",
+        "b": "Outlet Water Temperature",
+        "c": "Thermal Resistance",
+        "d": "Cluster Water Consumption Penalty"
+      },
+      "explanations": {
+        "a": "Incorrect. Heat load represents computing demand.",
+        "b": "Incorrect. Outlet temperature measures coolant conditions.",
+        "c": "Incorrect. Thermal resistance measures cooling effectiveness.",
+        "d": "Correct. This metric estimates water consumed by the cooling infrastructure."
+      },
+      "correctAnswer": "d",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q10 What is the primary engineering lesson demonstrated by this experiment?",
+      "answers": {
+        "a": "Maximum coolant flow rate is always the best solution",
+        "b": "Efficient cooling requires balancing thermal performance, energy consumption, and water usage",
+        "c": "Water usage has no connection to cooling performance",
+        "d": "Thermal resistance remains constant regardless of operating conditions"
+      },
+      "explanations": {
+        "a": "Incorrect. The experiment demonstrates diminishing returns at high flow rates.",
+        "b": "Correct. Engineers must balance cooling effectiveness with energy and environmental costs.",
+        "c": "Incorrect. Water usage is directly related to cooling infrastructure operation.",
+        "d": "Incorrect. Thermal resistance varies with operating conditions."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    }
+  ]
+}
