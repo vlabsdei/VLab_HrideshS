@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Add CSS at the head of HTML file -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="hd">
+    <span class="hd-badge">Virtual Lab</span>
+    <span class="hd-title">PDU Load Balancing</span>
+    <span class="hd-sub">— Three-Phase Power Distribution</span>
+    <span class="hd-spacer"></span>
+    <button class="hd-btn" id="btnCalc" onclick="toggleCalc()">∑ Equations</button>
+    <button class="hd-btn" id="btnReset" onclick="resetAll()">↺ Reset</button>
+    <div class="hd-pill pill-ok" id="statusPill">
+      <span class="pill-dot"></span>
+      <span id="statusTxt">Optimal</span>
+    </div>
+  </header>
+
+  <div class="app">
+
+
+    <!-- ══ LEFT PANEL ══ -->
+    <aside class="left">
+
+      <!-- PHASE CURRENTS -->
+      <div class="sect">
+        <div class="sect-title">Phase Currents</div>
+
+        <div class="phase-block" id="blockL1">
+          <div class="ph-hdr">
+            <div class="ph-label"><span class="ph-dot" style="background:var(--l1)"></span><span class="ph-l1">L1 —
+                Phase A</span></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-name">Current</span><span class="sl-val" id="vI1">25 A</span></div>
+            <input type="range" id="slI1" min="10" max="40" step="0.5" value="25">
+            <div class="sl-limits"><span>10 A</span><span>40 A</span></div>
+          </div>
+          <button class="breaker-reset-btn" id="btnResetL1" onclick="resetBreaker(0)" style="display:none">⚡ Reset
+            Breaker</button>
+        </div>
+
+        <div class="phase-block" id="blockL2">
+          <div class="ph-hdr">
+            <div class="ph-label"><span class="ph-dot" style="background:var(--l2)"></span><span class="ph-l2">L2 —
+                Phase B</span></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-name">Current</span><span class="sl-val" id="vI2">25 A</span></div>
+            <input type="range" id="slI2" min="10" max="40" step="0.5" value="25">
+            <div class="sl-limits"><span>10 A</span><span>40 A</span></div>
+          </div>
+          <button class="breaker-reset-btn" id="btnResetL2" onclick="resetBreaker(1)" style="display:none">⚡ Reset
+            Breaker</button>
+        </div>
+
+        <div class="phase-block" id="blockL3">
+          <div class="ph-hdr">
+            <div class="ph-label"><span class="ph-dot" style="background:var(--l3)"></span><span class="ph-l3">L3 —
+                Phase C</span></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-name">Current</span><span class="sl-val" id="vI3">25 A</span></div>
+            <input type="range" id="slI3" min="10" max="40" step="0.5" value="25">
+            <div class="sl-limits"><span>10 A</span><span>40 A</span></div>
+          </div>
+          <button class="breaker-reset-btn" id="btnResetL3" onclick="resetBreaker(2)" style="display:none">⚡ Reset
+            Breaker</button>
+        </div>
+      </div>
+
+      <!-- PHASE ANGLES -->
+      <div class="sect">
+        <div class="sect-title">Phase Angles</div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name"><span class="ph-l1">L1</span> Angle</span>
+            <span class="sl-val" id="vA1">0°</span>
+          </div>
+          <input type="range" id="slA1" min="-30" max="30" step="1" value="0">
+          <div class="sl-limits"><span>−30°</span><span>Nom: 0°</span><span>+30°</span></div>
+        </div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name"><span class="ph-l2">L2</span> Angle</span>
+            <span class="sl-val" id="vA2">120°</span>
+          </div>
+          <input type="range" id="slA2" min="90" max="150" step="1" value="120">
+          <div class="sl-limits"><span>90°</span><span>Nom: 120°</span><span>150°</span></div>
+        </div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name"><span class="ph-l3">L3</span> Angle</span>
+            <span class="sl-val" id="vA3">240°</span>
+          </div>
+          <input type="range" id="slA3" min="210" max="270" step="1" value="240">
+          <div class="sl-limits"><span>210°</span><span>Nom: 240°</span><span>270°</span></div>
+        </div>
+      </div>
+
+      <!-- SCENARIOS -->
+      <div class="sect">
+        <div class="sect-title">Scenarios</div>
+        <button class="sc-btn" id="btnHarm" onclick="toggleHarmonic()">
+          <span class="sc-ico">⚡</span>
+          <div>
+            <div class="sc-name">Harmonic Distortion Surge</div>
+            <div class="sc-sub">Shifts phase angles ±15° — simulates non-linear server loads</div>
+          </div>
+        </button>
+        <button class="sc-btn" onclick="resetAll()">
+          <span class="sc-ico">↺</span>
+          <div>
+            <div class="sc-name">Restore Defaults</div>
+            <div class="sc-sub">25 A each, nominal angles</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- EQUATION PANEL (toggled) -->
+      <div class="sect" id="calcSect" style="display:none">
+        <div class="sect-title">Live Equations</div>
+        <div class="calc-inner" id="calcInner" style="margin:0">—</div>
+      </div>
+
+      <!-- OBSERVATIONS -->
+      <div class="sect">
+        <div class="sect-title">Observations</div>
+        <button class="rec-btn" id="recBtn" onclick="recordObs()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="8" />
+            <circle cx="12" cy="12" r="3" fill="currentColor" />
+          </svg>
+          Record Reading
+        </button>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>I₁</th>
+                <th>I₂</th>
+                <th>I₃</th>
+                <th>θ₁</th>
+                <th>θ₂</th>
+                <th>θ₃</th>
+                <th>Iₙ</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="obsBody">
+              <tr>
+                <td colspan="9" class="tbl-empty">No readings yet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btn-row">
+          <button class="sm-btn" onclick="exportCSV()">↓ CSV</button>
+          <button class="sm-btn danger" onclick="clearObs()">✕ Clear</button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ══ VIEWPORT ══ -->
+    <div class="viewport" id="viewport">
+      <canvas id="c"></canvas>
+      <div class="trip-overlay" id="tripOverlay">
+        <div class="trip-banner">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          BREAKER TRIPPED — Overcurrent Detected
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ DASHBOARD ══ -->
+    <div class="dashboard">
+      <div class="dc" id="dcIn">
+        <span class="dc-lbl">Neutral Current</span>
+        <span class="dash-v" id="dvIn">—</span>
+        <span class="dc-unit">Amperes</span>
+        <div class="dc-bar">
+          <div class="dc-bar-fill" id="barIn"></div>
+        </div>
+      </div>
+      <div class="dc" id="dcI1">
+        <span class="dc-lbl">L1 Current</span>
+        <span class="dash-v" id="dvI1">—</span>
+        <span class="dc-unit">A</span>
+        <div class="dc-bar">
+          <div class="dc-bar-fill" id="barI1"></div>
+        </div>
+      </div>
+      <div class="dc" id="dcI2">
+        <span class="dc-lbl">L2 Current</span>
+        <span class="dash-v" id="dvI2">—</span>
+        <span class="dc-unit">A</span>
+        <div class="dc-bar">
+          <div class="dc-bar-fill" id="barI2"></div>
+        </div>
+      </div>
+      <div class="dc" id="dcI3">
+        <span class="dc-lbl">L3 Current</span>
+        <span class="dash-v" id="dvI3">—</span>
+        <span class="dc-unit">A</span>
+        <div class="dc-bar">
+          <div class="dc-bar-fill" id="barI3"></div>
+        </div>
+      </div>
+      <div class="dc" id="dcImb">
+        <span class="dc-lbl">Imbalance Index</span>
+        <span class="dash-v" id="dvImb">—</span>
+        <span class="dc-unit">%</span>
+        <div class="dc-bar">
+          <div class="dc-bar-fill" id="barImb"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Your code goes here-->
+
+  <!-- Add JS at the bottom of HTML file -->
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

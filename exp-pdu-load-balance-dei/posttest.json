@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 In a balanced three-phase system with each phase carrying 25A at nominal angles (0°, 120°, 240°), what is the neutral return current?",
+      "answers": {
+        "a": "25 A",
+        "b": "75 A",
+        "c": "0 A",
+        "d": "12.5 A"
+      },
+      "explanations": {
+        "a": "Incorrect. The vector sum cancels out in a balanced system.",
+        "b": "Incorrect. This is the arithmetic sum, not the vector sum.",
+        "c": "Correct. In a perfectly balanced system, the phasor sum of all three phases equals zero.",
+        "d": "Incorrect. Check the phasor calculation."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q2 What happens when Phase L1 current exceeds 32A in the simulation?",
+      "answers": {
+        "a": "The system becomes more efficient",
+        "b": "Nothing changes",
+        "c": "The Phase L1 breaker trips",
+        "d": "All three phases shut down simultaneously"
+      },
+      "explanations": {
+        "a": "Incorrect. Exceeding the breaker rating causes a protective disconnection.",
+        "b": "Incorrect. The overcurrent triggers protection.",
+        "c": "Correct. The 32A breaker ceiling causes the affected phase breaker to trip.",
+        "d": "Incorrect. Only the overloaded phase is affected initially."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q3 What effect does the Harmonic Distortion Surge scenario have on phase angles?",
+      "answers": {
+        "a": "No effect on angles",
+        "b": "Shifts angles by ±15°",
+        "c": "Doubles all phase angles",
+        "d": "Sets all angles to zero"
+      },
+      "explanations": {
+        "a": "Incorrect. Harmonic distortion directly affects phase alignment.",
+        "b": "Correct. Non-linear loads distort ideal phase alignments by approximately ±15°.",
+        "c": "Incorrect. Angles are shifted, not doubled.",
+        "d": "Incorrect. Setting all angles to zero would create a single-phase condition."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q4 If Phase L1 = 30A at 0°, L2 = 25A at 120°, and L3 = 25A at 240°, is the neutral current zero?",
+      "answers": {
+        "a": "Yes, because three phases are present",
+        "b": "No, because the phase currents are unequal",
+        "c": "Yes, because the angles are correct",
+        "d": "No, because 30A exceeds the breaker limit"
+      },
+      "explanations": {
+        "a": "Incorrect. Having three phases does not guarantee zero neutral current.",
+        "b": "Correct. Unequal phase magnitudes result in a non-zero phasor sum and therefore non-zero neutral current.",
+        "c": "Incorrect. Correct angles alone are not sufficient if magnitudes differ.",
+        "d": "Incorrect. 30A is below the 32A breaker ceiling."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q5 What is the minimum current demand per phase lane in the simulation?",
+      "answers": {
+        "a": "10 A",
+        "b": "20 A",
+        "c": "25 A",
+        "d": "32 A"
+      },
+      "explanations": {
+        "a": "Incorrect. 10A is below the minimum requirement.",
+        "b": "Incorrect. 20A is below the minimum.",
+        "c": "Correct. The target current demand is 25A minimum per lane.",
+        "d": "Incorrect. 32A is the breaker trip ceiling."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q6 What power delivery state occurs when a phase current drops below 25A?",
+      "answers": {
+        "a": "Optimal",
+        "b": "Breaker Tripped",
+        "c": "Underpowered",
+        "d": "Overclocked"
+      },
+      "explanations": {
+        "a": "Incorrect. Optimal requires all phases between 25A and 32A.",
+        "b": "Incorrect. Breaker trip occurs above 32A.",
+        "c": "Correct. The system enters Underpowered state when any phase is below 25A.",
+        "d": "Incorrect. This is not a valid state in the simulation."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q7 Why can a breaker trip even if the total rack power is within limits?",
+      "answers": {
+        "a": "Because breakers protect individual phases, not total power",
+        "b": "Because breakers measure temperature",
+        "c": "Because total power always equals phase power",
+        "d": "Because breakers only trip during power outages"
+      },
+      "explanations": {
+        "a": "Correct. Each phase has its own breaker rated at 32A, independent of total rack power.",
+        "b": "Incorrect. Breakers primarily respond to current.",
+        "c": "Incorrect. Total power is distributed across three phases.",
+        "d": "Incorrect. Breakers trip on overcurrent, not power outages."
+      },
+      "correctAnswer": "a",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Q8 Which formula is used to calculate neutral return current in this experiment?",
+      "answers": {
+        "a": "I_N = I_1 + I_2 + I_3",
+        "b": "I_N = √((ΣI·cosθ)² + (ΣI·sinθ)²)",
+        "c": "I_N = V / R",
+        "d": "I_N = P / V"
+      },
+      "explanations": {
+        "a": "Incorrect. This is arithmetic addition, not phasor summation.",
+        "b": "Correct. The neutral current is the magnitude of the complex phasor sum.",
+        "c": "Incorrect. This is Ohm's Law.",
+        "d": "Incorrect. This calculates current from power and voltage."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Q9 What is the practical consequence of high neutral return current in a data center?",
+      "answers": {
+        "a": "Faster computation",
+        "b": "Overheating of neutral conductors and increased power losses",
+        "c": "Improved cooling efficiency",
+        "d": "Reduced electricity bills"
+      },
+      "explanations": {
+        "a": "Incorrect. Neutral current does not affect compute speed.",
+        "b": "Correct. Excessive neutral current causes resistive heating and wastes energy.",
+        "c": "Incorrect. Power issues do not improve cooling.",
+        "d": "Incorrect. Higher neutral current increases energy losses and costs."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q10 What is the key engineering lesson from this experiment?",
+      "answers": {
+        "a": "More current always means better performance",
+        "b": "Balanced phase loading minimizes neutral current and ensures safe operation",
+        "c": "Neutral conductors are unnecessary in data centers",
+        "d": "Three-phase power is obsolete technology"
+      },
+      "explanations": {
+        "a": "Incorrect. Excessive current causes breaker trips and safety hazards.",
+        "b": "Correct. Proper load balancing is essential for safe, efficient power distribution.",
+        "c": "Incorrect. Neutral conductors are essential for handling imbalanced loads.",
+        "d": "Incorrect. Three-phase power is the standard in modern data centers."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    }
+  ]
+}

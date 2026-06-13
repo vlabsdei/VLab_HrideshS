@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 What is the purpose of a Power Distribution Unit (PDU) in a data center?",
+      "answers": {
+        "a": "To cool the servers",
+        "b": "To distribute electrical power to rack equipment",
+        "c": "To store backup data",
+        "d": "To provide internet connectivity"
+      },
+      "explanations": {
+        "a": "Incorrect. Cooling systems handle temperature management.",
+        "b": "Correct. PDUs distribute power from the facility supply to individual servers and devices.",
+        "c": "Incorrect. Data storage is handled by dedicated storage systems.",
+        "d": "Incorrect. Network switches and routers provide connectivity."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q2 How many phases does a standard three-phase power system use?",
+      "answers": {
+        "a": "One",
+        "b": "Two",
+        "c": "Three",
+        "d": "Four"
+      },
+      "explanations": {
+        "a": "Incorrect. A single-phase system uses one phase.",
+        "b": "Incorrect. Two-phase systems are not standard in data centers.",
+        "c": "Correct. Three-phase systems use three alternating current signals offset by 120°.",
+        "d": "Incorrect. Standard systems use three phases."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q3 What is the angular separation between phases in a balanced three-phase system?",
+      "answers": {
+        "a": "90°",
+        "b": "120°",
+        "c": "180°",
+        "d": "60°"
+      },
+      "explanations": {
+        "a": "Incorrect. 90° is used in two-phase systems.",
+        "b": "Correct. Each phase is separated by 120° in a three-phase system.",
+        "c": "Incorrect. 180° would create opposing phases.",
+        "d": "Incorrect. 60° is not the standard separation."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q4 What does the neutral conductor carry in a balanced three-phase system?",
+      "answers": {
+        "a": "Maximum current",
+        "b": "Half the total current",
+        "c": "Zero current",
+        "d": "Twice the phase current"
+      },
+      "explanations": {
+        "a": "Incorrect. In a balanced system, phase currents cancel out.",
+        "b": "Incorrect. The neutral carries the vector sum of phase currents.",
+        "c": "Correct. In a perfectly balanced system, the vector sum of all phase currents is zero.",
+        "d": "Incorrect. This only occurs under specific fault conditions."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q5 What happens when phase currents in a three-phase system are unequal?",
+      "answers": {
+        "a": "Neutral current becomes non-zero",
+        "b": "All breakers trip simultaneously",
+        "c": "Power consumption decreases",
+        "d": "Voltage increases on all phases"
+      },
+      "explanations": {
+        "a": "Correct. Unequal phase currents result in a non-zero neutral return current.",
+        "b": "Incorrect. Only individual phase breakers trip when exceeded.",
+        "c": "Incorrect. Unbalanced loads do not necessarily reduce power consumption.",
+        "d": "Incorrect. Voltage behavior depends on the specific imbalance."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q6 What is a circuit breaker designed to do?",
+      "answers": {
+        "a": "Increase current flow",
+        "b": "Store electrical energy",
+        "c": "Disconnect the circuit when current exceeds a safe limit",
+        "d": "Convert AC to DC power"
+      },
+      "explanations": {
+        "a": "Incorrect. Breakers limit current, not increase it.",
+        "b": "Incorrect. Batteries and capacitors store energy.",
+        "c": "Correct. Breakers protect circuits by disconnecting when current exceeds the rated limit.",
+        "d": "Incorrect. Rectifiers perform AC-DC conversion."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q7 Which type of electrical load can cause harmonic distortion?",
+      "answers": {
+        "a": "Resistive heaters",
+        "b": "Incandescent light bulbs",
+        "c": "Non-linear loads like switch-mode power supplies",
+        "d": "Electric fans"
+      },
+      "explanations": {
+        "a": "Incorrect. Resistive loads are linear and do not generate harmonics.",
+        "b": "Incorrect. Incandescent bulbs are purely resistive loads.",
+        "c": "Correct. Non-linear loads draw current in pulses, creating harmonic frequencies.",
+        "d": "Incorrect. Simple electric motors are approximately linear loads."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q8 Why is load balancing important in a three-phase PDU?",
+      "answers": {
+        "a": "To reduce internet latency",
+        "b": "To minimize neutral current and prevent overloading",
+        "c": "To increase data storage capacity",
+        "d": "To improve display resolution"
+      },
+      "explanations": {
+        "a": "Incorrect. Load balancing refers to electrical power, not network traffic.",
+        "b": "Correct. Balanced loading minimizes neutral current, reduces losses, and prevents safety hazards.",
+        "c": "Incorrect. Storage capacity is unrelated to power distribution.",
+        "d": "Incorrect. Display resolution is unrelated to power balancing."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q9 What does AC stand for in electrical systems?",
+      "answers": {
+        "a": "Advanced Computing",
+        "b": "Alternating Current",
+        "c": "Automatic Control",
+        "d": "Analog Circuit"
+      },
+      "explanations": {
+        "a": "Incorrect. AC refers to the type of electrical current.",
+        "b": "Correct. Alternating Current periodically reverses direction.",
+        "c": "Incorrect. This is not related to power systems.",
+        "d": "Incorrect. Analog circuits are a different concept."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q10 What is a phasor diagram used for?",
+      "answers": {
+        "a": "To display network topology",
+        "b": "To visualize the magnitude and phase relationship of AC quantities",
+        "c": "To measure temperature",
+        "d": "To store data"
+      },
+      "explanations": {
+        "a": "Incorrect. Network diagrams show topology.",
+        "b": "Correct. Phasor diagrams represent AC signals as rotating vectors showing magnitude and phase.",
+        "c": "Incorrect. Thermometers measure temperature.",
+        "d": "Incorrect. Data storage uses different mechanisms."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    }
+  ]
+}
