@@ -232,7 +232,7 @@ function computeTarget() {
     const Ta = S.hvac ? 40 : S.Ta;
     const R = S.R + (S.paste ? 0.15 : 0);
     if (S.fanMode === 'auto') S.fanPct = Math.max(20, Math.min(100, (S.currentTj - 28) * 2.2));
-    const effR = R * (1 - (S.fanPct / 100) * 0.38);
+    const effR = Math.max(0.05, R * (1 - (S.fanPct / 100) * 0.38));
     let Tj = Ta + S.P * effR;
     let throttle = false, effP = S.P;
     if (Tj > 85) { throttle = true; effP = S.P * (85 / Tj) * 0.92; Tj = Ta + effP * effR; }
@@ -251,7 +251,7 @@ function updateDisplay() {
     updateDash('Tj', Tj.toFixed(1), Tj > 95 ? 'crit' : Tj > 85 ? 'hot' : Tj > 70 ? 'warn' : '');
     updateDash('Ta', Ta.toFixed(0), (S.hvac || S.Ta >= 38) ? 'warn' : '');
     updateDash('P', S.effP.toFixed(0), S.throttle ? 'warn' : '');
-    updateDash('R', S.baseR.toFixed(2), S.paste ? 'warn' : '');
+    updateDash('R', S.effR.toFixed(2), S.paste ? 'warn' : '');
     updateDash('Fan', fanRPM, '');
     updateDash('Perf', perf, perf < 80 ? 'warn' : 'good');
     updateDash('TF', tflops, perf < 80 ? 'warn' : '');
@@ -264,7 +264,7 @@ function updateDisplay() {
 
     document.getElementById('vTa').textContent = (S.hvac ? 40 : S.Ta) + ' °C';
     document.getElementById('vP').textContent = S.P + ' W';
-    document.getElementById('vR').textContent = S.baseR.toFixed(2) + ' °C/W';
+    document.getElementById('vR').textContent = S.effR.toFixed(2) + ' °C/W';
     document.getElementById('vFan').textContent = Math.round(S.fanPct) + '%';
     if (S.hvac) document.getElementById('slTa').value = 40;
 
@@ -496,7 +496,7 @@ function updateCalcBox() {
     const col = tempColorHex(Tj);
     document.getElementById('cbFormula').innerHTML =
         `T<sub>j</sub> = T<sub>a</sub> + (P &times; R&theta;)<br>` +
-        `&nbsp;&nbsp;&nbsp;= ${Ta} + (${S.effP.toFixed(0)} &times; ${S.effR.toFixed(3)})<br>` +
+        `&nbsp;&nbsp;&nbsp;= ${Ta} + (${S.effP.toFixed(0)} &times; ${S.effR.toFixed(2)})<br>` +
         `&nbsp;&nbsp;&nbsp;= <strong style="color:${col}">${Tj.toFixed(1)} &deg;C</strong>` +
         (S.throttle ? `<br><span style="color:#DC2626;font-size:11px;font-weight:400">&nbsp;&nbsp;&nbsp;⚠ Thermal throttle active</span>` : '');
 }
@@ -567,6 +567,13 @@ function setFanMode(m) {
     document.getElementById('fanAutoBtn').className = 'tog-btn' + (m === 'auto' ? ' on' : '');
     document.getElementById('fanManBtn').className = 'tog-btn' + (m === 'manual' ? ' on' : '');
     document.getElementById('fanSlRow').style.display = m === 'manual' ? 'flex' : 'none';
+    
+    const slFan = document.getElementById('slFan');
+    if (slFan) {
+        slFan.value = S.fanPct;
+        syncSlider(slFan);
+    }
+    
     computeTarget(); updateDisplay();
 }
 
