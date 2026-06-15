@@ -175,9 +175,9 @@ function drawGPU(cx, cy, dpr) {
   const tc = t < .4 ? '#4ade80' : t < .7 ? '#fbbf24' : '#f87171';
   ctx.fillStyle = tc; ctx.font = `bold ${9 * dpr}px 'IBM Plex Mono',monospace`;
   ctx.fillText(Tg.toFixed(0) + '°C', cx, cy + 7 * dpr);
-  // Solder bumps
-  ctx.fillStyle = '#475569';
-  for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) { ctx.beginPath(); ctx.arc(x - 3 * dpr + c * 4.5 * dpr, y + h + 3 * dpr + r * 3.8 * dpr, 1.1 * dpr, 0, Math.PI * 2); ctx.fill(); }
+  
+  
+ 
 }
 
 // ══════════════════════════════════
