@@ -496,7 +496,7 @@ function updateCalcBox() {
     const col = tempColorHex(Tj);
     document.getElementById('cbFormula').innerHTML =
         `T<sub>j</sub> = T<sub>a</sub> + (P &times; R&theta;)<br>` +
-        `&nbsp;&nbsp;&nbsp;= ${Ta} + (${S.effP.toFixed(0)} &times; ${S.baseR.toFixed(2)})<br>` +
+        `&nbsp;&nbsp;&nbsp;= ${Ta} + (${S.effP.toFixed(0)} &times; ${S.effR.toFixed(3)})<br>` +
         `&nbsp;&nbsp;&nbsp;= <strong style="color:${col}">${Tj.toFixed(1)} &deg;C</strong>` +
         (S.throttle ? `<br><span style="color:#DC2626;font-size:11px;font-weight:400">&nbsp;&nbsp;&nbsp;⚠ Thermal throttle active</span>` : '');
 }

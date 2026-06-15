@@ -714,8 +714,7 @@ function updateCalcPanel() {
     `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="hl">${im}</span><br>` +
     `Iₙ = √(Σ Re² + Σ Im²)<br>` +
     `&nbsp;&nbsp;&nbsp;= √(${re}² + ${im}²)<br>` +
-    `&nbsp;&nbsp;&nbsp;= <span class="${In > 8 ? 'hl-r' : 'hl'}">${In.toFixed(2)} A</span><br>` +
-    `<b>Imbalance (IEEE):</b> ${imb.toFixed(1)}%`;
+    `&nbsp;&nbsp;&nbsp;= <span class="${In > 8 ? 'hl-r' : 'hl'}">${In.toFixed(2)} A</span>`;
 }
 
 // ══════════════════════════════════════
