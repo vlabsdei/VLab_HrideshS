@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 What does VRAM stand for?",
+      "answers": {
+        "a": "Virtual Random Access Memory",
+        "b": "Video Random Access Memory",
+        "c": "Variable Read-Access Module",
+        "d": "Visual Rendering Architecture Memory"
+      },
+      "explanations": {
+        "a": "Incorrect. VRAM specifically refers to video memory.",
+        "b": "Correct. VRAM is the dedicated memory on a GPU used for storing data during processing.",
+        "c": "Incorrect. This is not a real term.",
+        "d": "Incorrect. This is not a real term."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q2 What is a Large Language Model (LLM)?",
+      "answers": {
+        "a": "A physical hardware device for language translation",
+        "b": "A neural network with billions of parameters trained on text data",
+        "c": "A database for storing dictionaries",
+        "d": "A programming language"
+      },
+      "explanations": {
+        "a": "Incorrect. LLMs are software models, not hardware.",
+        "b": "Correct. LLMs are large neural networks trained to understand and generate text.",
+        "c": "Incorrect. LLMs process language, not store dictionaries.",
+        "d": "Incorrect. LLMs are AI models, not programming languages."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q3 What does quantization do to model weights?",
+      "answers": {
+        "a": "Increases the precision of each parameter",
+        "b": "Reduces the numerical precision to save memory",
+        "c": "Deletes unused parameters",
+        "d": "Doubles the model size"
+      },
+      "explanations": {
+        "a": "Incorrect. Quantization reduces precision.",
+        "b": "Correct. Quantization represents weights with fewer bits, reducing memory usage.",
+        "c": "Incorrect. Quantization changes precision, not the number of parameters.",
+        "d": "Incorrect. Quantization reduces model size."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q4 How many bytes does a single FP32 parameter require?",
+      "answers": {
+        "a": "1 byte",
+        "b": "2 bytes",
+        "c": "4 bytes",
+        "d": "8 bytes"
+      },
+      "explanations": {
+        "a": "Incorrect. 1 byte corresponds to 8-bit precision.",
+        "b": "Incorrect. 2 bytes corresponds to 16-bit precision.",
+        "c": "Correct. FP32 uses 32 bits = 4 bytes per parameter.",
+        "d": "Incorrect. 8 bytes corresponds to 64-bit precision."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q5 What is the KV cache used for in LLM inference?",
+      "answers": {
+        "a": "Storing the model's training data",
+        "b": "Caching Key-Value pairs for attention computation during generation",
+        "c": "Storing user passwords",
+        "d": "Compressing the model weights"
+      },
+      "explanations": {
+        "a": "Incorrect. Training data is not stored in the KV cache.",
+        "b": "Correct. The KV cache stores attention key-value pairs to avoid recomputation during autoregressive generation.",
+        "c": "Incorrect. The KV cache has no security function.",
+        "d": "Incorrect. Weight compression is done through quantization."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q6 What happens when total memory requirements exceed GPU VRAM?",
+      "answers": {
+        "a": "The model runs slower but still works",
+        "b": "A CUDA Out-of-Memory (OOM) error occurs",
+        "c": "The GPU automatically compresses the model",
+        "d": "Nothing happens"
+      },
+      "explanations": {
+        "a": "Incorrect. Exceeding VRAM causes a crash, not slowdown.",
+        "b": "Correct. The deployment fails with a CUDA OOM error when VRAM is exceeded.",
+        "c": "Incorrect. GPUs do not automatically compress models.",
+        "d": "Incorrect. Exceeding VRAM has severe consequences."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q7 Which parameter increases KV cache memory linearly?",
+      "answers": {
+        "a": "GPU clock speed",
+        "b": "Context length",
+        "c": "Network bandwidth",
+        "d": "Storage capacity"
+      },
+      "explanations": {
+        "a": "Incorrect. Clock speed does not affect memory requirements.",
+        "b": "Correct. KV cache memory grows linearly with context length.",
+        "c": "Incorrect. Network bandwidth is unrelated to KV cache size.",
+        "d": "Incorrect. Storage capacity is separate from VRAM."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q8 What is a 'parameter' in the context of neural networks?",
+      "answers": {
+        "a": "A hardware component of the GPU",
+        "b": "A trainable weight or bias in the model",
+        "c": "A type of memory chip",
+        "d": "A network configuration setting"
+      },
+      "explanations": {
+        "a": "Incorrect. Parameters are software values, not hardware.",
+        "b": "Correct. Parameters are the learned weights and biases that define the model's behavior.",
+        "c": "Incorrect. Parameters are numerical values, not physical chips.",
+        "d": "Incorrect. Model parameters differ from configuration settings."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q9 Which GPU has the most VRAM among common data center GPUs?",
+      "answers": {
+        "a": "RTX 4090 (24 GB)",
+        "b": "A100 (40 GB)",
+        "c": "H100 (80 GB)",
+        "d": "L40S (48 GB)"
+      },
+      "explanations": {
+        "a": "Incorrect. 24 GB is relatively low for data center use.",
+        "b": "Incorrect. The A100 also has an 80 GB variant, but the H100 offers 80 GB as standard.",
+        "c": "Correct. The H100 offers 80 GB of HBM3 VRAM.",
+        "d": "Incorrect. 48 GB is less than the H100."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q10 What is the main trade-off of using lower quantization (e.g., INT4)?",
+      "answers": {
+        "a": "Higher memory usage but better accuracy",
+        "b": "Lower memory usage but potential accuracy reduction",
+        "c": "No change in memory or accuracy",
+        "d": "Faster training but slower inference"
+      },
+      "explanations": {
+        "a": "Incorrect. Lower quantization reduces memory.",
+        "b": "Correct. Reducing precision saves memory but may reduce model quality.",
+        "c": "Incorrect. Quantization significantly affects both memory and accuracy.",
+        "d": "Incorrect. Quantization primarily affects inference, not training."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 A 7B parameter model at FP16 (16-bit) with a 1.2x overhead factor requires approximately how much VRAM for weights alone?",
+      "answers": {
+        "a": "7 GB",
+        "b": "14 GB",
+        "c": "16.8 GB",
+        "d": "28 GB"
+      },
+      "explanations": {
+        "a": "Incorrect. This does not account for the 2 bytes per parameter.",
+        "b": "Incorrect. This calculation misses the 1.2x overhead.",
+        "c": "Correct. M_weights = 7B × (16/8) × 1.2 = 7 × 2 × 1.2 = 16.8 GB.",
+        "d": "Incorrect. Check the calculation."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q2 What is the primary advantage of INT4 quantization over FP16?",
+      "answers": {
+        "a": "Higher model accuracy",
+        "b": "Approximately 4x reduction in weight memory",
+        "c": "Faster training speed",
+        "d": "Increased context length"
+      },
+      "explanations": {
+        "a": "Incorrect. Lower precision typically reduces accuracy slightly.",
+        "b": "Correct. INT4 uses 4 bits vs FP16's 16 bits, a 4x reduction in memory per parameter.",
+        "c": "Incorrect. INT4 is primarily used for inference optimization.",
+        "d": "Incorrect. Quantization does not directly change context length."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q3 Which component of total VRAM usage grows with batch size?",
+      "answers": {
+        "a": "Model weights memory",
+        "b": "KV cache memory",
+        "c": "GPU driver memory",
+        "d": "Operating system memory"
+      },
+      "explanations": {
+        "a": "Incorrect. Model weights are fixed regardless of batch size.",
+        "b": "Correct. KV cache is proportional to batch size (B × L × D_model × N_layers × 2).",
+        "c": "Incorrect. Driver memory is relatively constant.",
+        "d": "Incorrect. OS memory is separate from GPU VRAM."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q4 A 13B model at INT8 with 4096 context and batch size 32 triggers OOM on an 80GB GPU. Which change is most likely to resolve this?",
+      "answers": {
+        "a": "Increase context length to 8192",
+        "b": "Switch to FP32 quantization",
+        "c": "Reduce batch size to 4",
+        "d": "Increase model size to 30B"
+      },
+      "explanations": {
+        "a": "Incorrect. Increasing context increases KV cache memory.",
+        "b": "Incorrect. FP32 uses more memory per parameter.",
+        "c": "Correct. Reducing batch size directly reduces KV cache memory, which is the dynamic component.",
+        "d": "Incorrect. Larger models require more VRAM."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Q5 Why does the 1.2 overhead factor appear in the weights memory formula?",
+      "answers": {
+        "a": "To account for GPU manufacturing defects",
+        "b": "To account for runtime allocations, optimizer states, and framework buffers",
+        "c": "To convert between metric and imperial units",
+        "d": "To compensate for network latency"
+      },
+      "explanations": {
+        "a": "Incorrect. Manufacturing is unrelated to memory formulas.",
+        "b": "Correct. The 1.2 factor accounts for additional memory consumed by the inference framework and temporary allocations.",
+        "c": "Incorrect. Memory calculations use consistent units.",
+        "d": "Incorrect. Network latency does not affect VRAM usage."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q6 For a fixed model and batch size, doubling the context length causes KV cache memory to:",
+      "answers": {
+        "a": "Remain unchanged",
+        "b": "Double",
+        "c": "Quadruple",
+        "d": "Halve"
+      },
+      "explanations": {
+        "a": "Incorrect. Context length directly affects KV cache size.",
+        "b": "Correct. KV cache is linearly proportional to context length L.",
+        "c": "Incorrect. The relationship is linear, not quadratic.",
+        "d": "Incorrect. Increasing context increases cache size."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q7 Which deployment scenario is most likely to succeed on a 24GB GPU?",
+      "answers": {
+        "a": "70B model at FP16, context 8192, batch 16",
+        "b": "7B model at INT4, context 2048, batch 1",
+        "c": "30B model at FP32, context 4096, batch 8",
+        "d": "100B model at INT8, context 512, batch 1"
+      },
+      "explanations": {
+        "a": "Incorrect. A 70B FP16 model requires approximately 168 GB for weights alone.",
+        "b": "Correct. A 7B INT4 model requires approximately 4.2 GB for weights, leaving room for a small KV cache.",
+        "c": "Incorrect. A 30B FP32 model requires approximately 144 GB for weights.",
+        "d": "Incorrect. A 100B INT8 model requires approximately 120 GB for weights."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Q8 What does OOM stand for in the context of GPU deployment?",
+      "answers": {
+        "a": "Out of Order Memory",
+        "b": "Out of Memory",
+        "c": "Overflow of Model",
+        "d": "Optimal Operating Mode"
+      },
+      "explanations": {
+        "a": "Incorrect. OOM stands for Out of Memory.",
+        "b": "Correct. OOM occurs when memory requirements exceed available VRAM.",
+        "c": "Incorrect. This is not the correct expansion.",
+        "d": "Incorrect. OOM is an error condition, not an operating mode."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Q9 Why is the KV cache called 'dynamic' memory?",
+      "answers": {
+        "a": "Because it changes based on the programming language used",
+        "b": "Because it grows during inference based on context length and batch size",
+        "c": "Because it is stored on a different GPU",
+        "d": "Because it uses a different type of RAM"
+      },
+      "explanations": {
+        "a": "Incorrect. Programming language does not affect KV cache behavior.",
+        "b": "Correct. KV cache memory is allocated dynamically during inference and depends on runtime parameters.",
+        "c": "Incorrect. KV cache resides on the same GPU processing the model.",
+        "d": "Incorrect. KV cache uses the same VRAM as model weights."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Q10 What is the key engineering lesson from this experiment?",
+      "answers": {
+        "a": "Larger models always perform better",
+        "b": "Memory planning requires balancing model size, precision, context, and batch size against available VRAM",
+        "c": "GPU VRAM is unlimited for modern hardware",
+        "d": "Quantization has no practical impact on deployment"
+      },
+      "explanations": {
+        "a": "Incorrect. Larger models require careful memory planning to deploy.",
+        "b": "Correct. Successful LLM deployment requires optimizing multiple parameters within hardware constraints.",
+        "c": "Incorrect. VRAM is a finite and critical resource.",
+        "d": "Incorrect. Quantization dramatically affects deployability."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    }
+  ]
+}

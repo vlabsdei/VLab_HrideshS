@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Add CSS at the head of HTML file -->
+	 
+
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+		
+
+<!-- HEADER -->
+<div class="hd">
+  <div class="hd-title">LLM Tensor Memory Footprint</div>
+  <div class="hd-sub">— Virtual Lab</div>
+  <div class="hd-spacer"></div>
+  <button class="hd-btn" id="btnCalc" onclick="toggleCalc()">Equations</button>
+  <div class="hd-pill pill-ok" id="statusPill">
+    <div class="pill-dot"></div>
+    <span id="statusTxt">Deployed</span>
+  </div>
+</div>
+
+<div class="app">
+  <!-- ── LEFT PANEL ── -->
+  <div class="left">
+
+    <!-- Model Parameters -->
+    <div class="sect">
+      <div class="sect-title">Model Parameters</div>
+
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Parameter Count (N)</span>
+          <span class="sl-val" id="vParams">7B</span>
+        </div>
+        <input type="range" id="slParams" min="0" max="5" step="1" value="1">
+        <div class="sl-limits">
+          <span>1B</span><span>7B</span><span>13B</span><span>30B</span><span>70B</span><span>100B</span>
+        </div>
+      </div>
+
+      <div class="sl-row">
+        <div class="sl-top" style="margin-bottom:6px">
+          <span class="sl-name">Quantization Bit-Width (Q<sub>b</sub>)</span>
+        </div>
+        <div class="quant-grid">
+          <button class="q-btn" data-qb="32" onclick="setQuant(32)">FP32<small>32-bit</small></button>
+          <button class="q-btn active" data-qb="16" onclick="setQuant(16)">FP16<small>16-bit</small></button>
+          <button class="q-btn" data-qb="8" onclick="setQuant(8)">INT8<small>8-bit</small></button>
+          <button class="q-btn" data-qb="4" onclick="setQuant(4)">INT4<small>4-bit</small></button>
+        </div>
+      </div>
+
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Context Length (L)</span>
+          <span class="sl-val" id="vCtx">2048</span>
+        </div>
+        <input type="range" id="slCtx" min="0" max="4" step="1" value="1">
+        <div class="sl-limits">
+          <span>512</span><span>2K</span><span>8K</span><span>16K</span><span>32K</span>
+        </div>
+      </div>
+
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Batch Size (B)</span>
+          <span class="sl-val" id="vBatch">1</span>
+        </div>
+        <input type="range" id="slBatch" min="0" max="5" step="1" value="0">
+        <div class="sl-limits">
+          <span>1</span><span>4</span><span>8</span><span>16</span><span>64</span><span>128</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VRAM Usage -->
+    <div class="sect">
+      <div class="sect-title">VRAM Usage</div>
+      <div class="vram-bar-wrap">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
+          <span style="font-size:11px;color:var(--t2);font-weight:500">GPU Memory Budget</span>
+          <span style="font-family:ui-monospace,monospace;font-size:11px;color:var(--t3)" id="vramCapLabel">80 GB</span>
+        </div>
+        <div class="vram-track">
+          <div class="vram-seg-w" id="segW" style="width:0%"></div>
+          <div class="vram-seg-k" id="segK" style="width:0%;left:0%"></div>
+          <div class="vram-limit"></div>
+        </div>
+        <div class="vram-labels">
+          <span id="vramUsed">0 GB used</span>
+          <span id="vramFree">80 GB free</span>
+        </div>
+        <div class="vram-legend">
+          <span><span class="vram-dot" style="background:#2563EB"></span>Weights</span>
+          <span><span class="vram-dot" style="background:#7C3AED"></span>KV Cache</span>
+        </div>
+      </div>
+
+      <div class="sl-row">
+        <div class="sl-top" style="margin-bottom:6px">
+          <span class="sl-name">GPU Hardware</span>
+        </div>
+        <select id="gpuSelect" class="gpu-select">
+          <option value="40960" data-label="41 TB" data-count="512">512x NVIDIA H100 — 41 TB</option>
+          <option value="20480" data-label="20.5 TB" data-count="256">256x NVIDIA H100 — 20.5 TB</option>
+          <option value="5120" data-label="5.12 TB" data-count="64">64x NVIDIA H100 — 5.12 TB</option>
+          <option value="1280" data-label="1.28 TB" data-count="16">16x NVIDIA H100 — 1.28 TB</option>
+          <option value="640" data-label="640 GB" data-count="8">8x NVIDIA H100 — 640 GB</option>
+          <option value="320" data-label="320 GB" data-count="4">4x NVIDIA H100 — 320 GB</option>
+          <option value="160" data-label="160 GB" data-count="2">2x NVIDIA H100 — 160 GB</option>
+          <option value="80" data-label="80 GB" data-count="1" selected>NVIDIA H100 — 80 GB</option>
+          <option value="80" data-label="80 GB" data-count="1">NVIDIA A100 — 80 GB</option>
+          <option value="40" data-label="40 GB" data-count="1">NVIDIA A100 — 40 GB</option>
+          <option value="48" data-label="48 GB" data-count="1">NVIDIA L40S — 48 GB</option>
+          <option value="24" data-label="24 GB" data-count="1">NVIDIA RTX 4090 — 24 GB</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Quick Scenarios -->
+    <div class="sect">
+      <div class="sect-title">Quick Scenarios</div>
+      <div class="preset-grid">
+        <!-- setPreset(paramIdx, qb, ctxIdx, batchIdx, vramVal) -->
+        <button class="preset-btn" onclick="setPreset(0,4,0,0,24)">
+          <b>Edge Deploy</b>1B · INT4 · 512 ctx
+        </button>
+        <button class="preset-btn" onclick="setPreset(1,16,1,0,24)">
+          <b>Fast Infer</b>7B · FP16 · 2K ctx
+        </button>
+        <button class="preset-btn" onclick="setPreset(2,8,2,2,80)">
+          <b>Production</b>13B · INT8 · 8K / B8
+        </button>
+        <button class="preset-btn" onclick="setPreset(4,16,3,2,640)">
+          <b>Research</b>70B · FP16 · 16K / B8
+        </button>
+        <button class="preset-btn danger" onclick="setPreset(4,16,4,4,80)">
+          <b>Trigger OOM</b>70B · FP16 · 32K / B64
+        </button>
+        <button class="preset-btn" onclick="setPreset(4,4,4,0,80)">
+          <b>Fix OOM</b>70B · INT4 · 32K / B1
+        </button>
+      </div>
+    </div>
+
+    <!-- Equations (toggled from header) -->
+    <div class="sect" id="calcSect" style="display:none">
+      <div class="sect-title">Memory Equations</div>
+      <div class="calc-inner" id="calcInner">—</div>
+    </div>
+
+    <!-- Observations -->
+    <div class="sect">
+      <div class="sect-title">Observations</div>
+      <button class="rec-btn" id="recBtn" onclick="recordObs()">Record Reading</button>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Params</th><th>Qb</th><th>Ctx</th><th>Batch</th>
+              <th>W (GB)</th><th>KV (GB)</th><th>Total</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="obsBody">
+            <tr><td colspan="9" class="tbl-empty">No readings yet — adjust parameters and record</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn-row">
+        <button class="sm-btn" onclick="exportCSV()">Export CSV</button>
+        <button class="sm-btn danger" onclick="clearObs()">Clear</button>
+      </div>
+    </div>
+
+  </div><!-- /left -->
+
+  <!-- ── CANVAS VIEWPORT ── -->
+  <div class="viewport" id="vp">
+    <canvas id="c"></canvas>
+
+    <!-- OOM Crash Overlay -->
+    <div class="oom-overlay" id="oomOverlay">
+      <div class="oom-box">
+        <div class="oom-icon">!</div>
+        <div class="oom-title">CUDA Out-of-Memory</div>
+        <div class="oom-msg">Model configuration exceeds available GPU VRAM. Deployment failed.</div>
+        <div class="oom-detail" id="oomDetail"></div>
+        <button class="oom-btn" onclick="dismissOOM()">Adjust Parameters</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div class="dashboard">
+    <div class="dc" id="dcWeights">
+      <div class="dash-label">Weights Memory</div>
+      <div class="dash-v" id="vW">—</div>
+      <div class="dash-unit">GB</div>
+    </div>
+    <div class="dc" id="dcKV">
+      <div class="dash-label">KV Cache</div>
+      <div class="dash-v" id="vKV">—</div>
+      <div class="dash-unit">GB</div>
+    </div>
+    <div class="dc" id="dcTotal">
+      <div class="dash-label">Total VRAM Req.</div>
+      <div class="dash-v" id="vTotal">—</div>
+      <div class="dash-unit">GB</div>
+    </div>
+    <div class="dc" id="dcUtil">
+      <div class="dash-label">VRAM Utilization</div>
+      <div class="dash-v" id="vUtil">—</div>
+      <div class="dash-unit">%</div>
+    </div>
+    <div class="dc" id="dcStatus">
+      <div class="dash-label">Deploy Status</div>
+      <div class="dash-v" id="vStatus">—</div>
+      <div class="dash-unit" id="vStatusSub">—</div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+
+
+        <script src="./js/main.js"></script>
+</body>
+</html>
