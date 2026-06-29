@@ -1,0 +1,65 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 What does PCIe stand for?",
+      "answers": { "a": "Peripheral Component Interconnect Express", "b": "Parallel Computing Interface Express", "c": "Personal Computer Internal Exchange", "d": "Processor Cache Interface Engine" },
+      "explanations": { "a": "Correct. PCIe is a high-speed serial expansion bus standard.", "b": "Incorrect.", "c": "Incorrect.", "d": "Incorrect." },
+      "correctAnswer": "a", "difficulty": "beginner"
+    },
+    {
+      "question": "Q2 What is the approximate bandwidth of PCIe Gen4 x16?",
+      "answers": { "a": "16 GB/s", "b": "32 GB/s", "c": "64 GB/s", "d": "128 GB/s" },
+      "explanations": { "a": "Incorrect. This is PCIe Gen3 x16.", "b": "Incorrect. This is half the Gen4 bandwidth.", "c": "Correct. PCIe Gen4 x16 provides approximately 64 GB/s.", "d": "Incorrect. This is PCIe Gen5 x16." },
+      "correctAnswer": "c", "difficulty": "beginner"
+    },
+    {
+      "question": "Q3 What is GPU utilization?",
+      "answers": { "a": "The percentage of GPU VRAM used", "b": "The ratio of compute time to total step time", "c": "The GPU clock frequency", "d": "The number of active GPU cores" },
+      "explanations": { "a": "Incorrect. Utilization measures time efficiency, not memory.", "b": "Correct. GPU utilization = Tc / (Tc + Tt) × 100%.", "c": "Incorrect. Clock frequency is a hardware specification.", "d": "Incorrect. Active cores relate to parallel workload." },
+      "correctAnswer": "b", "difficulty": "beginner"
+    },
+    {
+      "question": "Q4 What happens when data transfer time exceeds compute time?",
+      "answers": { "a": "The GPU becomes compute-bound", "b": "The workload becomes I/O-bound and GPU sits idle", "c": "Performance improves", "d": "No change occurs" },
+      "explanations": { "a": "Incorrect. Compute-bound means compute time dominates.", "b": "Correct. When Tt > Tc, the GPU spends more time waiting than computing.", "c": "Incorrect. I/O bottlenecks reduce performance.", "d": "Incorrect. Longer transfer times directly reduce utilization." },
+      "correctAnswer": "b", "difficulty": "beginner"
+    },
+    {
+      "question": "Q5 Which interconnect technology is designed specifically for GPU-to-GPU communication?",
+      "answers": { "a": "USB", "b": "SATA", "c": "NVLink", "d": "Ethernet" },
+      "explanations": { "a": "Incorrect. USB is for peripheral devices.", "b": "Incorrect. SATA is for storage devices.", "c": "Correct. NVLink is NVIDIA's proprietary high-bandwidth GPU interconnect.", "d": "Incorrect. Ethernet is for network communication." },
+      "correctAnswer": "c", "difficulty": "beginner"
+    },
+    {
+      "question": "Q6 What unit is data transfer latency typically measured in?",
+      "answers": { "a": "Watts", "b": "Degrees Celsius", "c": "Milliseconds", "d": "Gigabytes" },
+      "explanations": { "a": "Incorrect. Watts measure power.", "b": "Incorrect. Degrees measure temperature.", "c": "Correct. Transfer latency is a time measurement.", "d": "Incorrect. Gigabytes measure data size." },
+      "correctAnswer": "c", "difficulty": "beginner"
+    },
+    {
+      "question": "Q7 What is the main advantage of higher interconnect bandwidth?",
+      "answers": { "a": "Reduced power consumption", "b": "Faster data transfer and higher GPU utilization", "c": "Increased storage capacity", "d": "Better display quality" },
+      "explanations": { "a": "Incorrect. Higher bandwidth may actually increase power.", "b": "Correct. More bandwidth means data arrives faster, reducing GPU idle time.", "c": "Incorrect. Bandwidth is unrelated to storage.", "d": "Incorrect. Display quality is unrelated to data interconnects." },
+      "correctAnswer": "b", "difficulty": "beginner"
+    },
+    {
+      "question": "Q8 What is a tensor in the context of AI computing?",
+      "answers": { "a": "A physical cable", "b": "A multi-dimensional array of numerical data", "c": "A type of GPU", "d": "A cooling system component" },
+      "explanations": { "a": "Incorrect. Tensors are data structures.", "b": "Correct. Tensors are the fundamental data structure used in deep learning computations.", "c": "Incorrect. Tensor cores exist but tensors themselves are data.", "d": "Incorrect. Tensors are unrelated to cooling." },
+      "correctAnswer": "b", "difficulty": "beginner"
+    },
+    {
+      "question": "Q9 What is bandwidth measured in for data interconnects?",
+      "answers": { "a": "Amperes", "b": "Hertz", "c": "GB/s (Gigabytes per second)", "d": "RPM" },
+      "explanations": { "a": "Incorrect. Amperes measure electrical current.", "b": "Incorrect. Hertz measures frequency.", "c": "Correct. Bandwidth is the data transfer rate measured in GB/s.", "d": "Incorrect. RPM measures rotational speed." },
+      "correctAnswer": "c", "difficulty": "beginner"
+    },
+    {
+      "question": "Q10 Why is GPU idle time a problem in data centers?",
+      "answers": { "a": "It improves cooling efficiency", "b": "It wastes expensive computing resources that could be performing useful work", "c": "It increases storage capacity", "d": "It has no impact" },
+      "explanations": { "a": "Incorrect. While idle GPUs generate less heat, the wasted compute is the primary concern.", "b": "Correct. GPU idle time means expensive silicon is not performing useful computation.", "c": "Incorrect. Idle time does not affect storage.", "d": "Incorrect. Idle GPUs represent significant financial waste." },
+      "correctAnswer": "b", "difficulty": "beginner"
+    }
+  ]
+}

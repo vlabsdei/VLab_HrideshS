@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Add CSS at the head of HTML file -->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body><body>
+
+  <!-- HEADER -->
+  <header class="hd">
+    <span class="hd-badge">Exp 5</span>
+    <span class="hd-title">PCIe vs NVLink</span>
+    <span class="hd-sub">— Data Transfer Virtual Lab</span>
+    <span class="hd-spacer"></span>
+    <button class="hd-btn" id="btnCalc" onclick="toggleCalc()">∑ Equations</button>
+    <button class="hd-btn" onclick="resetAll()">↺ Reset</button>
+    <div class="hd-pill pill-ok" id="statusPill">
+      <span class="pill-dot"></span>
+      <span id="statusTxt">Compute-Bound</span>
+    </div>
+  </header>
+
+  <div class="app">
+
+    <!-- ══ LEFT PANEL ══ -->
+    <aside class="left">
+
+      <!-- Transfer Scenario -->
+      <div class="sect">
+        <div class="sect-title">Transfer Scenario</div>
+        <div class="scen-grid">
+          <button class="scen-btn active" id="scen0" onclick="setScenario('host-gpu')">
+            Host → GPU
+          </button>
+          <button class="scen-btn" id="scen1" onclick="setScenario('gpu-gpu')">
+            GPU → GPU
+          </button>
+        </div>
+      </div>
+
+      <!-- Interconnect Standard -->
+      <div class="sect">
+        <div class="sect-title">Interconnect Standard</div>
+        <div class="ic-grid">
+          <button class="ic-btn active" id="ic0" onclick="setIC(0)">
+            PCIe Gen4<small>64 GB/s</small>
+          </button>
+          <button class="ic-btn" id="ic1" onclick="setIC(1)">
+            PCIe Gen5<small>128 GB/s</small>
+          </button>
+          <button class="ic-btn nvlink" id="ic2" onclick="setIC(2)">
+            NVLink 4<small>900 GB/s</small>
+          </button>
+        </div>
+      </div>
+
+      <!-- Parameters -->
+      <div class="sect">
+        <div class="sect-title">Parameters</div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name">Batch Tensor Size (D)</span>
+            <span class="sl-val" id="vData">10 GB</span>
+          </div>
+          <input type="range" id="slData" min="0" max="19" step="1" value="4">
+          <div class="sl-limits"><span>1 GB</span><span>100 GB</span></div>
+        </div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name">GPU Processing (T<sub>c</sub>)</span>
+            <span class="sl-val" id="vTc">100 ms</span>
+          </div>
+          <input type="range" id="slTc" min="0" max="13" step="1" value="5">
+          <div class="sl-limits"><span>10 ms</span><span>500 ms</span></div>
+        </div>
+      </div>
+
+      <!-- Architecture Info -->
+      <div class="sect">
+        <div class="sect-title">Architecture Info</div>
+        <div class="info-card" id="infoCard">
+          <div class="info-title" id="infoTitle">PCIe Architecture</div>
+          <ul class="info-list" id="infoList">
+            <li>Tree topology</li>
+            <li>CPU-mediated transfers</li>
+            <li>Standard system interconnect</li>
+            <li>Lower bandwidth</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Visual Component Key -->
+      <div class="sect">
+        <div class="sect-title">Visual Component Key</div>
+        <div class="info-card" id="legendCard"
+          style="background: rgba(255,255,255,0.02); border: 1.5px solid var(--border); padding: 12px 14px; border-radius: 8px;">
+          <div id="legendContent" style="font-size: 11px; display: grid; gap: 8px; line-height: 1.4; color: var(--fg);">
+            <!-- Dynamic Content -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Scenarios -->
+      <div class="sect">
+        <div class="sect-title">Quick Scenarios</div>
+        <div class="preset-grid">
+          <button class="preset-btn" onclick="setPreset(0,4,5)">
+            <b>⚡ Compute-Bound</b>Small data, long compute
+          </button>
+          <button class="preset-btn" onclick="setPreset(0,14,2)">
+            <b>🔴 I/O Bottleneck</b>Large data, PCIe Gen4
+          </button>
+          <button class="preset-btn" onclick="setPreset(1,14,2)">
+            <b>🟡 Gen5 Relief</b>Large data, PCIe Gen5
+          </button>
+          <button class="preset-btn" onclick="setPreset(2,19,2)">
+            <b>🟢 NVLink Scale</b>Max data, NVLink 900
+          </button>
+        </div>
+      </div>
+
+      <!-- Equations (toggled) -->
+      <div class="sect" id="calcSect" style="display:none">
+        <div class="sect-title">Live Equations</div>
+        <div class="calc-inner" id="calcInner">—</div>
+      </div>
+
+      <!-- Observations -->
+      <div class="sect">
+        <div class="sect-title">Observations</div>
+        <button class="rec-btn" id="recBtn" onclick="recordObs()">⊕ Record Reading</button>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>IC</th>
+                <th>D</th>
+                <th>T<sub>c</sub></th>
+                <th>T<sub>t</sub></th>
+                <th>T<sub>total</sub></th>
+                <th>Util%</th>
+                <th>Mode</th>
+              </tr>
+            </thead>
+            <tbody id="obsBody">
+              <tr>
+                <td colspan="8" class="tbl-empty">No readings yet — adjust parameters and record</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btn-row">
+          <button class="sm-btn" onclick="exportCSV()">↓ Export CSV</button>
+          <button class="sm-btn danger" onclick="clearObs()">✕ Clear</button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ══ CANVAS VIEWPORT ══ -->
+    <div class="viewport" id="vp">
+      <canvas id="c"></canvas>
+    </div>
+
+    <!-- ══ DASHBOARD ══ -->
+    <div class="dashboard">
+      <div class="dc" id="dcBW">
+        <div class="dash-label">Bandwidth</div>
+        <div class="dash-v" id="vBW">—</div>
+        <div class="dash-unit">GB/s</div>
+        <div class="dc-bar">
+          <div class="dc-bar-fill" id="barBW" style="width:0%;background:var(--blue)"></div>
+        </div>
+      </div>
+      <div class="dc" id="dcTt">
+        <div class="dash-label">Transfer Latency</div>
+        <div class="dash-v" id="vTt">—</div>
+        <div class="dash-unit">ms</div>
+        <div class="dc-bar">
+          <div class="dc-bar-fill" id="barTt" style="width:0%;background:var(--orange)"></div>
+        </div>
+      </div>
+      <div class="dc" id="dcTotal">
+        <div class="dash-label">Total Step Time</div>
+        <div class="dash-v" id="vTotal">—</div>
+        <div class="dash-unit">ms</div>
+      </div>
+      <div class="dc" id="dcUtil">
+        <div class="dash-label">GPU Utilization</div>
+        <div class="dash-v" id="vUtil">—</div>
+        <div class="dash-unit">%</div>
+        <div class="dc-bar">
+          <div class="dc-bar-fill" id="barUtil" style="width:0%;background:var(--green)"></div>
+        </div>
+      </div>
+      <div class="dc" id="dcMode">
+        <div class="dash-label">Workload Mode</div>
+        <div class="dash-v" id="vMode">—</div>
+        <div class="dash-unit" id="vModeSub">—</div>
+      </div>
+    </div>
+
+  </div>
+
+  
+</body>
+
+		<!-- Your code goes here-->
+
+	<!-- Add JS at the bottom of HTML file --> 
+        <script src="./js/main.js"></script>
+</body>
+</html>

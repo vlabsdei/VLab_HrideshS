@@ -1,0 +1,65 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Q1 If transferring 10 GB over PCIe Gen4 (64 GB/s), what is the approximate transfer latency?",
+      "answers": { "a": "10 ms", "b": "64 ms", "c": "156 ms", "d": "640 ms" },
+      "explanations": { "a": "Incorrect. Check the calculation.", "b": "Incorrect. Check the calculation.", "c": "Correct. Tt = 10/64 = 0.15625 seconds ≈ 156 ms.", "d": "Incorrect. Check the calculation." },
+      "correctAnswer": "c", "difficulty": "intermediate"
+    },
+    {
+      "question": "Q2 With Tc = 100 ms and Tt = 100 ms, what is the GPU utilization?",
+      "answers": { "a": "100%", "b": "75%", "c": "50%", "d": "25%" },
+      "explanations": { "a": "Incorrect. 100% requires Tt = 0.", "b": "Incorrect. Check the formula.", "c": "Correct. Utilization = 100/(100+100) × 100 = 50%.", "d": "Incorrect. Check the formula." },
+      "correctAnswer": "c", "difficulty": "intermediate"
+    },
+    {
+      "question": "Q3 NVLink provides approximately how many times more bandwidth than PCIe Gen4 x16?",
+      "answers": { "a": "2x", "b": "7x", "c": "14x", "d": "50x" },
+      "explanations": { "a": "Incorrect. The ratio is much higher.", "b": "Incorrect. Close but not accurate.", "c": "Correct. 900/64 ≈ 14x more bandwidth.", "d": "Incorrect. The ratio is approximately 14x." },
+      "correctAnswer": "c", "difficulty": "intermediate"
+    },
+    {
+      "question": "Q4 For a compute-bound workload (Tc >> Tt), GPU utilization approaches:",
+      "answers": { "a": "0%", "b": "50%", "c": "100%", "d": "Negative values" },
+      "explanations": { "a": "Incorrect. Low utilization indicates I/O-bound.", "b": "Incorrect. 50% means equal compute and transfer.", "c": "Correct. When Tc >> Tt, the Tt term becomes negligible and utilization approaches 100%.", "d": "Incorrect. Utilization cannot be negative." },
+      "correctAnswer": "c", "difficulty": "intermediate"
+    },
+    {
+      "question": "Q5 Which scenario would benefit most from upgrading PCIe Gen4 to NVLink?",
+      "answers": { "a": "Small data (1 GB) with long compute (500 ms)", "b": "Large data (100 GB) with short compute (10 ms)", "c": "No data transfer required", "d": "CPU-only workloads" },
+      "explanations": { "a": "Incorrect. Small data already transfers quickly.", "b": "Correct. Large data with short compute creates severe I/O bottleneck that NVLink resolves.", "c": "Incorrect. No transfer means interconnect is irrelevant.", "d": "Incorrect. CPU workloads don't use GPU interconnects." },
+      "correctAnswer": "b", "difficulty": "advanced"
+    },
+    {
+      "question": "Q6 What does 'mesh topology' mean in the context of NVLink?",
+      "answers": { "a": "GPUs are connected in a single chain", "b": "GPUs have multiple parallel data paths to each other", "c": "GPUs share a single bus", "d": "GPUs are disconnected" },
+      "explanations": { "a": "Incorrect. Chain topology limits bandwidth.", "b": "Correct. Mesh topology provides multiple simultaneous communication paths.", "c": "Incorrect. Shared buses create contention.", "d": "Incorrect. GPUs must be connected for communication." },
+      "correctAnswer": "b", "difficulty": "intermediate"
+    },
+    {
+      "question": "Q7 If GPU utilization is 30%, what does this indicate?",
+      "answers": { "a": "The GPU is performing optimally", "b": "The workload is severely I/O-bound", "c": "The GPU has too much memory", "d": "The compute time is too long" },
+      "explanations": { "a": "Incorrect. 30% utilization is very poor.", "b": "Correct. 70% of the step time is spent waiting for data, indicating a severe I/O bottleneck.", "c": "Incorrect. Memory amount is unrelated to utilization.", "d": "Incorrect. Longer compute would actually increase utilization." },
+      "correctAnswer": "b", "difficulty": "intermediate"
+    },
+    {
+      "question": "Q8 Doubling the interconnect bandwidth while keeping data size constant will:",
+      "answers": { "a": "Double the transfer latency", "b": "Halve the transfer latency", "c": "Have no effect", "d": "Double the GPU processing time" },
+      "explanations": { "a": "Incorrect. More bandwidth reduces latency.", "b": "Correct. Tt = D/Bandwidth, so doubling bandwidth halves the transfer time.", "c": "Incorrect. Bandwidth directly affects transfer latency.", "d": "Incorrect. GPU processing time is independent of bandwidth." },
+      "correctAnswer": "b", "difficulty": "intermediate"
+    },
+    {
+      "question": "Q9 What is 'direct memory fabric mapping' in NVLink?",
+      "answers": { "a": "GPUs share the same physical memory chip", "b": "GPUs can access each other's VRAM directly without CPU intervention", "c": "Memory is stored on the network switch", "d": "Each GPU can only access its own memory" },
+      "explanations": { "a": "Incorrect. Each GPU has its own VRAM.", "b": "Correct. NVLink enables unified memory addressing across GPUs.", "c": "Incorrect. Memory is not stored on switches.", "d": "Incorrect. NVLink enables cross-GPU memory access." },
+      "correctAnswer": "b", "difficulty": "advanced"
+    },
+    {
+      "question": "Q10 What is the key takeaway from this experiment?",
+      "answers": { "a": "All interconnects perform the same", "b": "Interconnect bandwidth critically determines GPU efficiency for large data workloads", "c": "GPU computation speed is the only factor that matters", "d": "PCIe Gen4 is always sufficient" },
+      "explanations": { "a": "Incorrect. Performance varies dramatically between standards.", "b": "Correct. The experiment shows how I/O bottlenecks waste GPU resources and how higher bandwidth resolves them.", "c": "Incorrect. Data transfer speed is equally important.", "d": "Incorrect. PCIe Gen4 becomes a bottleneck for large transfers." },
+      "correctAnswer": "b", "difficulty": "intermediate"
+    }
+  ]
+}
