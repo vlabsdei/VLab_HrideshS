@@ -8,7 +8,7 @@
 | ----------------------------- | -------------- |
 | Batch Tensor Data Size (D)    | 10 GB          |
 | Interconnect Standard         | PCIe Gen4 x16  |
-| GPU Processing Duration (Tc)  | 100 ms         |
+| GPU Processing Duration (T<sub>c</sub>)  | 100 ms         |
 
 3. Familiarize yourself with the data transfer visualization and performance metrics.
 
@@ -67,9 +67,13 @@
 
 ## Step 6: Verify the Utilization Formula
 
-$$
-GPU\ Utilization = \frac{T_c}{T_c + T_t} \times 100\%
-$$
+<div style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+  <em>GPU Utilization</em> = 
+  <span style="display: inline-block; vertical-align: middle; text-align: center;">
+    <span style="border-bottom: 1px solid currentColor; display: block; padding: 0 5px;">T<sub>c</sub></span>
+    <span style="display: block; padding: 0 5px;">T<sub>c</sub> + T<sub>t</sub></span>
+  </span> &times; 100%
+</div>
 
 1. Select specific values and calculate manually.
 2. Compare with simulation output.

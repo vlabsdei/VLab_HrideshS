@@ -49,16 +49,20 @@ Data transfer latency is the time required to move a batch of data from the sour
 
 The formula is:
 
-$$
-T_t = \frac{D}{Bandwidth}
-$$
+<div style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+  <em>T<sub>t</sub></em> = 
+  <span style="display: inline-block; vertical-align: middle; text-align: center;">
+    <span style="border-bottom: 1px solid currentColor; display: block; padding: 0 5px;">D</span>
+    <span style="display: block; padding: 0 5px;">Bandwidth</span>
+  </span>
+</div>
 
 Where:
 
 | Symbol     | Description                      |
 | ---------- | -------------------------------- |
-| $T_t$      | Data Transfer Latency (seconds)  |
-| $D$        | Batch Tensor Data Size (bytes)   |
+| <em>T<sub>t</sub></em>      | Data Transfer Latency (seconds)  |
+| <em>D</em>        | Batch Tensor Data Size (bytes)   |
 | Bandwidth  | Interconnect throughput (bytes/s)|
 
 Lower transfer latency means data arrives at the GPU faster, allowing computation to begin sooner.
@@ -67,7 +71,7 @@ Lower transfer latency means data arrives at the GPU faster, allowing computatio
 
 ## 4. GPU Processing Duration
 
-The GPU processing execution duration ($T_c$) represents the time the GPU spends performing actual computations on the data.
+The GPU processing execution duration (<em>T<sub>c</sub></em>) represents the time the GPU spends performing actual computations on the data.
 
 This includes:
 
@@ -76,7 +80,7 @@ This includes:
 - Activation functions
 - Gradient calculations
 
-$T_c$ depends on:
+<em>T<sub>c</sub></em> depends on:
 
 - Model architecture complexity
 - Batch size
@@ -93,11 +97,11 @@ Each training or inference step consists of two phases:
 
 The total step duration is:
 
-$$
-T_{total} = T_c + T_t
-$$
+<div style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+  <em>T<sub>total</sub></em> = <em>T<sub>c</sub></em> + <em>T<sub>t</sub></em>
+</div>
 
-Ideally, $T_t$ should be negligible compared to $T_c$ so that most of the step time is spent on useful computation.
+Ideally, <em>T<sub>t</sub></em> should be negligible compared to <em>T<sub>c</sub></em> so that most of the step time is spent on useful computation.
 
 ---
 
@@ -105,9 +109,13 @@ Ideally, $T_t$ should be negligible compared to $T_c$ so that most of the step t
 
 GPU utilization measures how efficiently the GPU is being used:
 
-$$
-GPU\ Utilization = \frac{T_c}{T_c + T_t} \times 100\%
-$$
+<div style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+  <em>GPU Utilization</em> = 
+  <span style="display: inline-block; vertical-align: middle; text-align: center;">
+    <span style="border-bottom: 1px solid currentColor; display: block; padding: 0 5px;">T<sub>c</sub></span>
+    <span style="display: block; padding: 0 5px;">T<sub>c</sub> + T<sub>t</sub></span>
+  </span> &times; 100%
+</div>
 
 | Utilization | Interpretation                    |
 | ----------- | --------------------------------- |
@@ -124,7 +132,7 @@ High GPU utilization means the interconnect is fast enough that the GPU spends m
 
 ### I/O-Bound
 
-When $T_t > T_c$, the workload is I/O-bound:
+When <em>T<sub>t</sub></em> &gt; <em>T<sub>c</sub></em>, the workload is I/O-bound:
 
 - GPU spends more time waiting for data than computing
 - Increasing GPU performance provides no benefit
@@ -132,7 +140,7 @@ When $T_t > T_c$, the workload is I/O-bound:
 
 ### Compute-Bound
 
-When $T_c > T_t$, the workload is compute-bound:
+When <em>T<sub>c</sub></em> &gt; <em>T<sub>t</sub></em>, the workload is compute-bound:
 
 - GPU spends most time on computation
 - Data arrives before the GPU is ready for the next batch
