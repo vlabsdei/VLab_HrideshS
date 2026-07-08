@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "questions": [
+    { "question": "Q1 What is InfiniBand?",
+     "answers": { "a": "A type of GPU", "b": "A high-performance networking standard for low-latency communication", "c": "A cooling system", "d": "A storage device" },
+      "explanations": { "a": "Incorrect.", "b": "Correct. InfiniBand provides low-latency, high-bandwidth networking for HPC.", "c": "Incorrect.", "d": "Incorrect." },
+       "correctAnswer": "b", "difficulty": "beginner" },
+    { "question": "Q2 What is a network topology?", "answers": 
+    { "a": "The physical arrangement and connection pattern of network nodes", "b": "The speed of a network connection", "c": "The number of GPUs in a system", "d": "The temperature of network cables" }, "explanations": 
+    { "a": "Correct. Topology describes how nodes are interconnected.", "b": "Incorrect. Speed is bandwidth.", "c": "Incorrect. Node count is separate.", "d": "Incorrect. Temperature is unrelated." }, "correctAnswer": "a", "difficulty": "beginner" },
+    { "question": "Q3 How many hops does a Fat-Tree topology require between any two nodes?", "answers":
+     { "a": "1", "b": "2", "c": "4", "d": "Variable" }, "explanations": 
+     { "a": "Incorrect.", "b": "Incorrect.", "c": "Correct. Fat-Tree limits hops to exactly 4 regardless of cluster size.", "d": "Incorrect. Fat-Tree has fixed hops, unlike 3D Torus." }, "correctAnswer": "c", "difficulty": "beginner" },
+    { "question": "Q4 What does 'serialization latency' mean?", "answers":
+     { "a": "Time to convert data from parallel to serial format for transmission", "b": "Time for a GPU to boot up", "c": "Time to store data on disk", "d": "Time to compile code" }, 
+     "explanations": { "a": "Correct. It is the time to place data onto the network link.", "b": "Incorrect.", "c": "Incorrect.", "d": "Incorrect." }, "correctAnswer": "a", "difficulty": "beginner" },
+    { "question": "Q5 What is the bandwidth of InfiniBand NDR?", "answers": { "a": "100 Gbps", "b": "200 Gbps", "c": "400 Gbps", "d": "800 Gbps" }, "explanations": { "a": "Incorrect.", "b": "Incorrect. That is HDR.", "c": "Correct. NDR provides 400 Gbps per port.", "d": "Incorrect. That is XDR." }, "correctAnswer": "c", "difficulty": "beginner" },
+    { "question": "Q6 In a 3D Torus, how are the routing hops calculated?", "answers": { "a": "H = N", "b": "H = log₂(N)", "c": "H = ⌊³√N⌋", "d": "H = 4 always" }, "explanations": { "a": "Incorrect.", "b": "Incorrect.", "c": "Correct. Hops scale with the cube root of the node count.", "d": "Incorrect. That is Fat-Tree." }, "correctAnswer": "c", "difficulty": "intermediate" },
+    { "question": "Q7 What is a 'hop' in networking?", "answers": { "a": "A data compression step", "b": "A single link traversal through a switch or router", "c": "A cooling mechanism", "d": "A type of GPU instruction" }, "explanations": { "a": "Incorrect.", "b": "Correct. Each hop represents passing through one intermediate network device.", "c": "Incorrect.", "d": "Incorrect." }, "correctAnswer": "b", "difficulty": "beginner" },
+    { "question": "Q8 Why does 3D Torus have lower cabling cost than Fat-Tree?", "answers": { "a": "It uses wireless connections", "b": "Each node connects only to its nearest neighbors", "c": "It requires no switches", "d": "It uses shorter cables" }, "explanations": { "a": "Incorrect.", "b": "Correct. Each node has a fixed number of connections (6 neighbors), reducing total cabling.", "c": "Incorrect. Switches may still be involved.", "d": "Incorrect. Cable length is not the primary factor." }, "correctAnswer": "b", "difficulty": "intermediate" },
+    { "question": "Q9 What is bisection bandwidth?", "answers": { "a": "The bandwidth of a single link", "b": "The total bandwidth available between two equal halves of a network", "c": "Half the total network bandwidth", "d": "The bandwidth of the fastest switch" }, "explanations": { "a": "Incorrect.", "b": "Correct. Bisection bandwidth measures worst-case aggregate bandwidth when the network is split in half.", "c": "Incorrect. It is a structural measure, not simply half.", "d": "Incorrect." }, "correctAnswer": "b", "difficulty": "intermediate" },
+    { "question": "Q10 What is RDMA?", "answers": { "a": "Random Data Memory Allocation", "b": "Remote Direct Memory Access", "c": "Redundant Distributed Memory Architecture", "d": "Rapid Data Movement Algorithm" }, "explanations": { "a": "Incorrect.", "b": "Correct. RDMA allows direct memory-to-memory transfers between nodes without CPU involvement.", "c": "Incorrect.", "d": "Incorrect." }, "correctAnswer": "b", "difficulty": "beginner" }
+  ]
+}

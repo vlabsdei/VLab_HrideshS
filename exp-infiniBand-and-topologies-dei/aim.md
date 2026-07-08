@@ -1,0 +1,1 @@
+### To compare the worst-case routing hops, serialization latency, and total network fabric delay across Fat-Tree and 3D Torus topologies using InfiniBand NDR and XDR link standards for varying cluster sizes and payload sizes.
