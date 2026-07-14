@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Add CSS at the head of HTML file -->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+
+<!-- HEADER -->
+<header class="hd">
+  
+  <span class="hd-spacer"></span>
+  <button class="hd-btn" id="btnCalc" onclick="toggleCalc()">∑ Equations</button>
+  <button class="hd-btn" onclick="resetAll()">↺ Reset</button>
+  <div class="hd-pill pill-ok" id="statusPill">
+    <span class="pill-dot"></span>
+    <span id="statusTxt">Efficient Scaling</span>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- ══ LEFT PANEL ══ -->
+  <aside class="left">
+
+    <!-- Parameters -->
+    <div class="sect">
+      <div class="sect-title">Workload Parameters</div>
+
+      <!-- Parallelizable Fraction -->
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Parallelization Factor (P<sub>f</sub>)</span>
+          <span class="sl-val" id="vPf">0.95</span>
+        </div>
+        <input type="range" id="slPf" min="0" max="5" step="1" value="2">
+        <div class="sl-limits"><span>0.80</span><span>0.90</span><span>0.95</span><span>0.99</span><span>0.999</span><span>0.9999</span></div>
+      </div>
+
+      <!-- Node Count -->
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Cluster Node Count (N)</span>
+          <span class="sl-val" id="vN">16</span>
+        </div>
+        <input type="range" id="slN" min="0" max="6" step="1" value="2">
+        <div class="sl-limits"><span>1</span><span>4</span><span>16</span><span>64</span><span>256</span><span>1,024</span><span>4,096</span></div>
+      </div>
+    </div>
+
+    <!-- Communication Overhead -->
+    <div class="sect">
+      <div class="sect-title">Communication Overhead</div>
+      <button class="classic-btn" id="classicBtn" onclick="toggleClassic()">
+        <span class="dot"></span>
+        <span id="classicLabel">Classic Amdahl's Law — Off</span>
+      </button>
+      <div class="sl-row" id="coRow">
+        <div class="sl-top">
+          <span class="sl-name">Overhead Coefficient (C<sub>o</sub>)</span>
+          <span class="sl-val" id="vCo">0.0010</span>
+        </div>
+        <input type="range" id="slCo" min="0" max="5" step="1" value="2">
+        <div class="sl-limits"><span>0</span><span>.0005</span><span>.001</span><span>.002</span><span>.005</span><span>.01</span></div>
+      </div>
+    </div>
+
+    <!-- Scaling Properties -->
+    <div class="sect">
+      <div class="sect-title">Scaling Model Properties</div>
+      <div class="info-card" id="infoCard">
+        <div class="info-title" id="infoTitle">Classic Amdahl's Law</div>
+        <ul class="info-list" id="infoList">
+          <li>Speedup rises monotonically with N</li>
+          <li>Bounded by asymptote 1/(1-P<sub>f</sub>)</li>
+          <li>No communication penalty modeled</li>
+          <li>Diminishing — but never negative — returns</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Visual Component Key -->
+    <div class="sect">
+      <div class="sect-title">Visual Component Key</div>
+      <div class="legend-card" id="legendCard">
+        <div id="legendContent"></div>
+      </div>
+    </div>
+
+    <!-- Quick Scenarios -->
+    <div class="sect">
+      <div class="sect-title">Quick Scenarios</div>
+      <div class="preset-grid">
+        <button class="preset-btn" onclick="setPreset(2,5,2,true)">
+          <b>Classic Amdahl</b>Pf=0.95 · N=1024 · Co=0
+        </button>
+        <button class="preset-btn" onclick="setPreset(3,4,2,true)">
+          <b>High Serial Cost</b>Pf=0.99 · N=256 · Co=0
+        </button>
+        <button class="preset-btn" onclick="setPreset(2,5,4,false)">
+          <b>Overhead Effect</b>Pf=0.95 · N=1024 · Co=0.005
+        </button>
+        <button class="preset-btn" onclick="setPreset(2,5,3,false)">
+          <b>Diminishing Point</b>Pf=0.95 · N=1024 · Co=0.002
+        </button>
+        <button class="preset-btn" onclick="setPreset(4,5,2,false)">
+          <b>Near-Perfect Pf</b>Pf=0.999 · N=1024 · Co=0.001
+        </button>
+        <button class="preset-btn danger" onclick="setPreset(2,6,5,false)">
+          <b>Massive Waste</b>Pf=0.95 · N=4096 · Co=0.01
+        </button>
+      </div>
+    </div>
+
+    <!-- Equations (toggled) -->
+    <div class="sect" id="calcSect" style="display:none">
+      <div class="sect-title">Live Equations</div>
+      <div class="calc-inner" id="calcInner">—</div>
+    </div>
+
+    <!-- Observations -->
+    <div class="sect">
+      <div class="sect-title">Observations</div>
+      <button class="rec-btn" id="recBtn" onclick="recordObs()">⊕ Record Reading</button>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>P<sub>f</sub></th><th>N</th><th>C<sub>o</sub></th>
+              <th>S<sub>max</sub></th><th>Eff(%)</th><th>N*</th><th>Waste($)</th>
+            </tr>
+          </thead>
+          <tbody id="obsBody">
+            <tr><td colspan="8" class="tbl-empty">No readings yet — adjust parameters and record</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn-row">
+        <button class="sm-btn" onclick="exportCSV()">↓ Export CSV</button>
+        <button class="sm-btn danger" onclick="clearObs()">✕ Clear</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══ CANVAS VIEWPORT ══ -->
+  <div class="viewport" id="vp">
+    <canvas id="c"></canvas>
+  </div>
+
+  <!-- ══ DASHBOARD ══ -->
+  <div class="dashboard">
+    <div class="dc" id="dcSpeed">
+      <div class="dash-label">Theoretical Speedup</div>
+      <div class="dash-v" id="vSpeed">—</div>
+      <div class="dash-unit">× (S<sub>max</sub>)</div>
+    </div>
+    <div class="dc" id="dcEff">
+      <div class="dash-label">Efficiency</div>
+      <div class="dash-v" id="vEff">—</div>
+      <div class="dash-unit">% (S/N)</div>
+    </div>
+    <div class="dc" id="dcOpt">
+      <div class="dash-label">Diminishing Returns</div>
+      <div class="dash-v" id="vOpt">—</div>
+      <div class="dash-unit">optimal N*</div>
+    </div>
+    <div class="dc" id="dcWaste">
+      <div class="dash-label">Wasted Infrastructure</div>
+      <div class="dash-v" id="vWaste">—</div>
+      <div class="dash-unit">USD @ $30k/GPU</div>
+    </div>
+    <div class="dc" id="dcRating">
+      <div class="dash-label">Scaling Rating</div>
+      <div class="dash-v" id="vRating">—</div>
+      <div class="dash-unit" id="vRatingSub">—</div>
+    </div>
+  </div>
+
+</div>
+
+
+		<!-- Your code goes here-->
+
+	<!-- Add JS at the bottom of HTML file --> 
+        <script src="./js/main.js"></script>
+</body>
+</html>
