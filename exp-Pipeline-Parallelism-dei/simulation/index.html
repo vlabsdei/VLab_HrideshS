@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Add CSS at the head of HTML file -->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+		
+  <!-- HEADER -->
+  <div class="hd">
+    <div class="hd-badge">Exp 10</div>
+    <div class="hd-title">Pipeline Parallelism Wall-Clock Time</div>
+    <div class="hd-sub">— Virtual Lab</div>
+    <div class="hd-spacer"></div>
+    <button class="hd-btn" id="btnCalc" onclick="toggleCalc()">Equations</button>
+    <div class="hd-pill pill-ok" id="statusPill">
+      <div class="pill-dot"></div>
+      <span id="statusTxt">Efficient</span>
+    </div>
+  </div>
+
+  <div class="app">
+    <!-- ── LEFT PANEL ── -->
+    <div class="left">
+
+      <!-- Pipeline Configuration -->
+      <div class="sect">
+        <div class="sect-title">Pipeline Configuration</div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name">Total Network Layer Depth (L)</span>
+            <span class="sl-val" id="vLayers">64</span>
+          </div>
+          <input type="range" id="slLayers" min="32" max="128" step="16" value="64">
+          <div class="sl-limits"><span>32</span><span>64</span><span>96</span><span>128</span></div>
+        </div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name">Pipeline Stage Splits (PP)</span>
+            <span class="sl-val" id="vPP">4</span>
+          </div>
+          <input type="range" id="slPP" min="0" max="3" step="1" value="1">
+          <div class="sl-limits"><span>2</span><span>4</span><span>8</span><span>16</span></div>
+        </div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name">Micro-batch Count (M)</span>
+            <span class="sl-val" id="vM">16</span>
+          </div>
+          <input type="range" id="slM" min="0" max="4" step="1" value="2">
+          <div class="sl-limits"><span>4</span><span>8</span><span>16</span><span>32</span><span>64</span></div>
+        </div>
+      </div>
+
+      <!-- Hardware Configuration -->
+      <div class="sect">
+        <div class="sect-title">Hardware Configuration</div>
+
+        <div class="sl-row">
+          <div class="sl-top" style="margin-bottom:6px">
+            <span class="sl-name">Inter-GPU Interconnect</span>
+          </div>
+          <select id="interSelect" class="gpu-select" onchange="onInterChange(this.value)">
+            <option value="4.5">PCIe Gen4 x16 — ~25 GB/s</option>
+            <option value="2.4">PCIe Gen5 x16 — ~50 GB/s</option>
+            <option value="1.2" selected>NVLink 3.0 — ~300 GB/s</option>
+            <option value="0.6">NVLink 4.0 — ~450 GB/s</option>
+          </select>
+        </div>
+
+        <div class="sl-row">
+          <div class="sl-top">
+            <span class="sl-name">GPU Performance</span>
+            <span class="sl-val" id="vThrottle">100%</span>
+          </div>
+          <input type="range" id="slThrottle" min="60" max="100" step="5" value="100">
+          <div class="sl-limits"><span>60% (hot)</span><span>80%</span><span>100% (cool)</span></div>
+        </div>
+
+        <div class="legend">
+          <span><span class="legend-dot" style="background:#2563EB"></span>Forward compute</span>
+          <span><span class="legend-hatch"></span>Bubble (idle wait)</span>
+        </div>
+      </div>
+
+      <!-- Quick Scenarios -->
+      <div class="sect">
+        <div class="sect-title">Quick Scenarios</div>
+        <div class="preset-grid">
+          <button class="preset-btn" onclick="preset(64,1,2,'1.2',100)">
+            <b>Baseline</b>64L · PP4 · M16
+          </button>
+          <button class="preset-btn" onclick="preset(64,1,4,'0.6',100)">
+            <b>Optimal Throughput</b>PP4 · M64 · NVLink4
+          </button>
+          <button class="preset-btn danger" onclick="preset(64,3,0,'4.5',100)">
+            <b>Trigger Bubble Blowup</b>PP16 · M4 · PCIe4
+          </button>
+          <button class="preset-btn" onclick="preset(128,2,3,'1.2',100)">
+            <b>Deep Model</b>128L · PP8 · M32
+          </button>
+          <button class="preset-btn" onclick="preset(null,null,null,null,60)">
+            <b>Thermal Throttle</b>Clock drops to 60%
+          </button>
+          <button class="preset-btn wide" onclick="preset(128,1,2,'1.2',100)">
+            <b>128-Layer Challenge</b>Tune PP &amp; M to minimize bubble while VRAM/device stays under 80 GB
+          </button>
+        </div>
+        <button class="sm-btn" onclick="resetDefaults()">Reset to Defaults</button>
+      </div>
+
+      <!-- Equations (toggled from header) -->
+      <div class="sect" id="calcSect" style="display:none">
+        <div class="sect-title">Pipeline Equations</div>
+        <div class="calc-inner" id="calcInner">—</div>
+      </div>
+
+      <!-- Observations -->
+      <div class="sect">
+        <div class="sect-title">Observations</div>
+        <button class="rec-btn" id="recBtn" onclick="recordObs()">Record Reading</button>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>L</th>
+                <th>PP</th>
+                <th>M</th>
+                <th>Link</th>
+                <th>T<sub>lg</sub>(ms)</th>
+                <th>Step(ms)</th>
+                <th>Bubble%</th>
+                <th>VRAM/Dev</th>
+              </tr>
+            </thead>
+            <tbody id="obsBody">
+              <tr>
+                <td colspan="9" class="tbl-empty">No readings yet — adjust parameters and record</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btn-row">
+          <button class="sm-btn" onclick="exportCSV()">Export CSV</button>
+          <button class="sm-btn danger" onclick="clearObs()">Clear</button>
+        </div>
+      </div>
+
+    </div><!-- /left -->
+
+    <!-- ── CANVAS VIEWPORT ── -->
+    <div class="viewport" id="vp">
+      <canvas id="c"></canvas>
+    </div>
+
+    <!-- ── DASHBOARD ── -->
+    <div class="dashboard">
+      <div class="dc" id="dcBubble">
+        <div class="dash-label">Bubble Fraction</div>
+        <div class="dash-v" id="vBubble">—</div>
+        <div class="dash-unit">%</div>
+      </div>
+      <div class="dc" id="dcStep">
+        <div class="dash-label">Step Duration</div>
+        <div class="dash-v" id="vStep">—</div>
+        <div class="dash-unit">ms</div>
+      </div>
+      <div class="dc waste" id="dcVram">
+        <div class="dash-label">VRAM / Device</div>
+        <div class="dash-v" id="vVram">—</div>
+        <div class="dash-unit">GB</div>
+      </div>
+      <div class="dc" id="dcTlg">
+        <div class="dash-label">T layer-group</div>
+        <div class="dash-v" id="vTlg">—</div>
+        <div class="dash-unit">ms (compute+xfer)</div>
+      </div>
+      <div class="dc" id="dcStatus">
+        <div class="dash-label">Pipeline Status</div>
+        <div class="dash-v" id="vStatus">—</div>
+        <div class="dash-unit" id="vStatusSub">—</div>
+      </div>
+    </div>
+
+  </div><!-- /app -->
+
+  
+        <script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+### To analyze the relationship between network layer depth, pipeline stage splits, and micro-batch sizing on pipeline bubble fraction overhead, estimated multi-node run duration, and device VRAM footprint reduction in pipeline-parallel distributed training.
