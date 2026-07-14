@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Add CSS at the head of HTML file -->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+
+<!-- HEADER -->
+<div class="hd">
+  
+  <div class="hd-spacer"></div>
+  <button class="hd-btn" id="btnStart" onclick="startSim()">Start</button>
+  <button class="hd-btn" id="btnPause" onclick="togglePause()" style="display:none">Pause</button>
+  <button class="hd-btn" id="btnReset" onclick="resetCluster()" style="display:none">Reset</button>
+  <button class="hd-btn" id="btnCalc" onclick="toggleCalc()">Equations</button>
+  <div class="hd-pill pill-ok" id="statusPill">
+    <div class="pill-dot"></div>
+    <span id="statusTxt">Balanced</span>
+  </div>
+</div>
+
+<div class="app">
+  <!-- ── LEFT PANEL ── -->
+  <div class="left">
+
+    <!-- Scheduling Configuration -->
+    <div class="sect">
+      <div class="sect-title">Scheduling Configuration</div>
+
+      <div class="sub-label">Queue Allocation Algorithm</div>
+      <div class="opt-grid c3">
+        <button class="opt-btn active" data-alg="fifo" onclick="setAlgorithm('fifo')">FIFO<small>Arrival order</small></button>
+        <button class="opt-btn" data-alg="sjf" onclick="setAlgorithm('sjf')">SJF<small>Shortest first</small></button>
+        <button class="opt-btn" data-alg="fair" onclick="setAlgorithm('fair')">Fair-Share<small>Priority</small></button>
+      </div>
+
+      <div class="sub-label">Preemption Eviction Protocol</div>
+      <div class="opt-grid c2">
+        <button class="opt-btn active" data-pre="kill" onclick="setPreemption('kill')">Kill / Restart<small>Progress lost</small></button>
+        <button class="opt-btn" data-pre="checkpoint" onclick="setPreemption('checkpoint')">Checkpoint<small>State saved</small></button>
+      </div>
+    </div>
+
+    <!-- Cluster & Workload -->
+    <div class="sect">
+      <div class="sect-title">Cluster &amp; Workload</div>
+
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">GPU Nodes</span>
+          <span class="sl-val" id="vNodes">6</span>
+        </div>
+        <input type="range" id="slNodes" min="2" max="8" step="1" value="6" oninput="onNodesInput(this.value)">
+        <div class="sl-limits"><span>2</span><span>5</span><span>8</span></div>
+      </div>
+
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Workload Mix (Short : Long)</span>
+          <span class="sl-val" id="vMix">50:50</span>
+        </div>
+        <input type="range" id="slMix" min="20" max="80" step="10" value="50" oninput="onMixInput(this.value)">
+        <div class="sl-limits"><span>20:80</span><span>50:50</span><span>80:20</span></div>
+      </div>
+
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Job Arrival Rate</span>
+          <span class="sl-val" id="vArrival">18/min</span>
+        </div>
+        <input type="range" id="slArrival" min="6" max="36" step="2" value="18" oninput="onArrivalInput(this.value)">
+        <div class="sl-limits"><span>6/min</span><span>21/min</span><span>36/min</span></div>
+      </div>
+
+      <div class="legend">
+        <span><span class="legend-dot" style="background:#2563EB"></span>Interactive (short)</span>
+        <span><span class="legend-dot" style="background:#7C3AED"></span>Training (long)</span>
+        <span><span class="legend-dot" style="background:#DC2626"></span>Emergency</span>
+      </div>
+    </div>
+
+    <!-- Quick Scenarios -->
+    <div class="sect">
+      <div class="sect-title">Quick Scenarios</div>
+      <div class="preset-grid">
+        <button class="preset-btn" onclick="presetFifoConvoy()">
+          <b>FIFO Convoy Test</b>1 node · long job blocks queue
+        </button>
+        <button class="preset-btn" onclick="presetFairShare()">
+          <b>Fair-Share Balanced</b>6 nodes · checkpointing on
+        </button>
+        <button class="preset-btn" onclick="presetSJF()">
+          <b>SJF Optimized</b>Minimizes avg wait time
+        </button>
+        <button class="preset-btn" onclick="presetKillStress()">
+          <b>Kill/Restart Stress</b>Long-heavy mix · high waste
+        </button>
+        <button class="preset-btn wide" onclick="presetCheckpointDemo()">
+          <b>Checkpoint Recovery Demo</b>Fair-Share + Graceful Checkpointing — then inject an emergency job to compare recovery cost
+        </button>
+        <button class="preset-btn danger" onclick="injectEmergency()">
+          <b>Inject High-Priority Emergency Job</b>Forces eviction if the cluster is full — watch the eviction protocol in action
+        </button>
+      </div>
+      <button class="sm-btn" onclick="resetCluster()">Reset Cluster</button>
+    </div>
+
+    <!-- Equations (toggled from header) -->
+    <div class="sect" id="calcSect" style="display:none">
+      <div class="sect-title">Scheduling Equations</div>
+      <div class="calc-inner" id="calcInner">—</div>
+    </div>
+
+    <!-- Observations -->
+    <div class="sect">
+      <div class="sect-title">Observations</div>
+      <button class="rec-btn" id="recBtn" onclick="recordObs()">Record Reading</button>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Algo</th><th>Preempt</th><th>Mix</th>
+              <th>Wait(s)</th><th>Util(%)</th><th>Waste</th><th>Recov(s)</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="obsBody">
+            <tr><td colspan="9" class="tbl-empty">No readings yet — adjust parameters and record</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn-row">
+        <button class="sm-btn" onclick="exportCSV()">Export CSV</button>
+        <button class="sm-btn danger" onclick="clearObs()">Clear</button>
+      </div>
+    </div>
+
+  </div><!-- /left -->
+
+  <!-- ── CANVAS VIEWPORT ── -->
+  <div class="viewport" id="vp">
+    <canvas id="c"></canvas>
+    <div id="queueContainer">
+      <div id="queueTitle">WAITING QUEUE — 0 jobs</div>
+      <div id="queueLane">
+        <div id="queueScrollContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div class="dashboard">
+    <div class="dc" id="dcWait">
+      <div class="dash-label">Avg Wait Time</div>
+      <div class="dash-v" id="vWait">—</div>
+      <div class="dash-unit">seconds</div>
+    </div>
+    <div class="dc" id="dcUtil">
+      <div class="dash-label">GPU Utilization</div>
+      <div class="dash-v" id="vUtil">—</div>
+      <div class="dash-unit">%</div>
+    </div>
+    <div class="dc waste" id="dcWaste">
+      <div class="dash-label">Wasted Compute</div>
+      <div class="dash-v" id="vWaste">0</div>
+      <div class="dash-unit">tokens</div>
+    </div>
+    <div class="dc" id="dcRecovery">
+      <div class="dash-label">Avg Recovery Time</div>
+      <div class="dash-v" id="vRecovery">—</div>
+      <div class="dash-unit">seconds</div>
+    </div>
+    <div class="dc" id="dcStatus">
+      <div class="dash-label">Cluster Status</div>
+      <div class="dash-v" id="vStatus">—</div>
+      <div class="dash-unit" id="vStatusSub">—</div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+
+        <script src="./js/main.js"></script>
+</body>
+</html>
