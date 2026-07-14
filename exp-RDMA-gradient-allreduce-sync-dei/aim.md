@@ -1,0 +1,1 @@
+### To compare the all-reduce synchronization latency, kernel copying overhead, and cluster compute efficiency between standard TCP/IP stack and hardware-offloaded RDMA protocols for gradient tensor synchronization in distributed AI training.

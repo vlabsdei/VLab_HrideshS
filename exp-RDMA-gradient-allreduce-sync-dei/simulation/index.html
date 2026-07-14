@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Add CSS at the head of HTML file -->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+
+<!-- HEADER -->
+<header class="hd">
+ 
+  <span class="hd-spacer"></span>
+  <button class="hd-btn" id="btnCalc" onclick="toggleCalc()">∑ Equations</button>
+  <button class="hd-btn" onclick="resetAll()">↺ Reset</button>
+  <div class="hd-pill pill-ok" id="statusPill">
+    <span class="pill-dot"></span>
+    <span id="statusTxt">Optimal Sync</span>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- ══ LEFT PANEL ══ -->
+  <aside class="left">
+
+    <!-- Protocol -->
+    <div class="sect">
+      <div class="sect-title">Network Transfer Protocol</div>
+      <div class="proto-grid">
+        <button class="proto-btn active" id="protoTCP" onclick="setProto('tcp')">
+          TCP/IP Stack<small>Kernel-copied</small>
+        </button>
+        <button class="proto-btn rdma" id="protoRDMA" onclick="setProto('rdma')">
+          RDMA<small>HW-offloaded</small>
+        </button>
+      </div>
+    </div>
+
+    <!-- Parameters -->
+    <div class="sect">
+      <div class="sect-title">Cluster Parameters</div>
+
+      <!-- Node Count -->
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">GPU Node Count (N)</span>
+          <span class="sl-val" id="vN">8</span>
+        </div>
+        <input type="range" id="slN" min="0" max="4" step="1" value="1">
+        <div class="sl-limits"><span>4</span><span>8</span><span>16</span><span>32</span><span>64</span></div>
+      </div>
+
+      <!-- Gradient Tensor Size -->
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Gradient Tensor Size (S<sub>g</sub>)</span>
+          <span class="sl-val" id="vGrad">500 MB</span>
+        </div>
+        <input type="range" id="slGrad" min="0" max="4" step="1" value="2">
+        <div class="sl-limits"><span>50</span><span>200</span><span>500</span><span>1000</span><span>2000</span></div>
+      </div>
+
+      <!-- Injection Speed -->
+      <div class="sl-row">
+        <div class="sl-top">
+          <span class="sl-name">Network Injection Speed (B<sub>inj</sub>)</span>
+          <span class="sl-val" id="vSpeed">400 Gbps</span>
+        </div>
+        <input type="range" id="slSpeed" min="0" max="3" step="1" value="2">
+        <div class="sl-limits"><span>100</span><span>200</span><span>400</span><span>800</span></div>
+      </div>
+    </div>
+
+    <!-- Straggler -->
+    <div class="sect">
+      <div class="sect-title">Failure Scenario</div>
+      <button class="strag-btn" id="stragBtn" onclick="toggleStraggler()">
+        <span class="dot"></span>
+        <span id="stragLabel">Straggler Node — Inactive</span>
+      </button>
+    </div>
+
+    <!-- Protocol Properties -->
+    <div class="sect">
+      <div class="sect-title">Protocol Properties</div>
+      <div class="info-card tcp" id="infoCard">
+        <div class="info-title" id="infoTitle">TCP/IP Stack</div>
+        <ul class="info-list" id="infoList">
+          <li>Data copied user-space → kernel → NIC</li>
+          <li>Per-node kernel overhead: N × T<sub>kernel</sub></li>
+          <li>CPU involved in every transfer</li>
+          <li>Overhead grows linearly with cluster size</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Visual Component Key -->
+    <div class="sect">
+      <div class="sect-title">Visual Component Key</div>
+      <div class="legend-card" id="legendCard">
+        <div id="legendContent"></div>
+      </div>
+    </div>
+
+    <!-- Quick Scenarios -->
+    <div class="sect">
+      <div class="sect-title">Quick Scenarios</div>
+      <div class="preset-grid">
+        <button class="preset-btn" onclick="setPreset('tcp',1,2,2,false)">
+          <b> TCP/IP Baseline</b>8 nodes · 500MB · 400G
+        </button>
+        <button class="preset-btn" onclick="setPreset('rdma',1,2,2,false)">
+          <b> RDMA Upgrade</b>8 nodes · 500MB · 400G
+        </button>
+        <button class="preset-btn" onclick="setPreset('tcp',2,2,2,false)">
+          <b>⚡ TCP at Scale</b>16 nodes · 500MB · 400G
+        </button>
+        <button class="preset-btn" onclick="setPreset('rdma',2,2,2,false)">
+          <b> RDMA at Scale</b>16 nodes · 500MB · 400G
+        </button>
+        <button class="preset-btn" onclick="setPreset('tcp',4,3,2,false)">
+          <b> Massive Cluster</b>64 nodes · 1000MB TCP
+        </button>
+        <button class="preset-btn danger" onclick="setPreset('rdma',2,2,2,true)">
+          <b> Straggler Hit</b>16 nodes · RDMA + straggler
+        </button>
+      </div>
+    </div>
+
+    <!-- Equations (toggled) -->
+    <div class="sect" id="calcSect" style="display:none">
+      <div class="sect-title">Live Equations</div>
+      <div class="calc-inner" id="calcInner">—</div>
+    </div>
+
+    <!-- Observations -->
+    <div class="sect">
+      <div class="sect-title">Observations</div>
+      <button class="rec-btn" id="recBtn" onclick="recordObs()">⊕ Record Reading</button>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Proto</th><th>N</th><th>S<sub>g</sub></th><th>B<sub>inj</sub></th>
+              <th>Kernel(ms)</th><th>T<sub>sync</sub>(ms)</th><th>Eff(%)</th>
+            </tr>
+          </thead>
+          <tbody id="obsBody">
+            <tr><td colspan="8" class="tbl-empty">No readings yet — adjust parameters and record</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn-row">
+        <button class="sm-btn" onclick="exportCSV()">↓ Export CSV</button>
+        <button class="sm-btn danger" onclick="clearObs()">✕ Clear</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══ CANVAS VIEWPORT ══ -->
+  <div class="viewport" id="vp">
+    <div id="phaseOverlay" class="phase-overlay">
+      <div class="phase-title" id="overlayPhase" style="color:var(--blue)">Phase 1: Scatter-Reduce</div>
+      <div class="phase-step-info" id="overlayStep">Step 1 of 7 (6 remaining)</div>
+    </div>
+    <div class="sim-controls">
+      <button class="sim-btn active" id="btnPlay" onclick="togglePlay()">▶ Start Simulation</button>
+      <button class="sim-btn" id="btnPause" onclick="togglePause()">⏸ Pause</button>
+      <button class="sim-btn" id="btnReset" onclick="resetProgress()">⏹ Reset</button>
+    </div>
+    <canvas id="c"></canvas>
+  </div>
+
+  <!-- ══ DASHBOARD ══ -->
+  <div class="dashboard">
+    <div class="dc" id="dcKernel">
+      <div class="dash-label">Kernel Overhead</div>
+      <div class="dash-v" id="vKernel">—</div>
+      <div class="dash-unit">ms</div>
+    </div>
+    <div class="dc" id="dcTsync">
+      <div class="dash-label">Sync Latency (T<sub>sync</sub>)</div>
+      <div class="dash-v" id="vTsync">—</div>
+      <div class="dash-unit">ms</div>
+    </div>
+    <div class="dc" id="dcEff">
+      <div class="dash-label">Compute Efficiency</div>
+      <div class="dash-v" id="vEff">—</div>
+      <div class="dash-unit">%</div>
+    </div>
+    <div class="dc" id="dcSpeedup">
+      <div class="dash-label">RDMA Speedup</div>
+      <div class="dash-v" id="vSpeedup">—</div>
+      <div class="dash-unit">× vs TCP/IP</div>
+    </div>
+    <div class="dc" id="dcRating">
+      <div class="dash-label">Sync Rating</div>
+      <div class="dash-v" id="vRating">—</div>
+      <div class="dash-unit" id="vRatingSub">—</div>
+    </div>
+  </div>
+
+</div>
+
+
+        <script src="./js/main.js"></script>
+</body>
+</html>
