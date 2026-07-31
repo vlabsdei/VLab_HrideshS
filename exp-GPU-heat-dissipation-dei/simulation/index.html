@@ -70,14 +70,14 @@
 			<div class="sect">
 				<div class="sect-title">Scenarios</div>
 				<button class="sc-btn" id="btnPaste" onclick="togglePaste()">
-					<span class="sc-ico">🧪</span>
+
 					<div>
 						<div class="sc-name">Thermal Paste Degradation</div>
 						<div class="sc-sub">+0.15 °C/W thermal resistance</div>
 					</div>
 				</button>
 				<button class="sc-btn" id="btnHvac" onclick="toggleHvac()">
-					<span class="sc-ico">🌡️</span>
+
 					<div>
 						<div class="sc-name">HVAC Failure</div>
 						<div class="sc-sub">Forces Tₐ = 40 °C</div>
@@ -94,6 +94,9 @@
 			<div class="sect">
 				<div class="sect-title">Formula</div>
 				<button class="calc-btn" id="calcBtn" onclick="toggleCalc()">∑ Show Calculation</button>
+				<div id="calcBox">
+					<div class="cb-formula" id="cbFormula"></div>
+				</div>
 			</div>
 
 		</aside>
@@ -173,9 +176,9 @@
 					<!-- Layer 2: Heatsink -->
 					<div class="exp-layer" id="elHeatsink">
 						<div style="position:relative;width:420px">
+							<canvas id="airflowCanvas" width="420" height="56"></canvas>
 							<div class="hs-fins-row" id="hsFinsRow"></div>
 							<div class="hs-base"></div>
-							<canvas id="airflowCanvas" width="420" height="56"></canvas>
 						</div>
 						<div class="exp-lbl-wrap">
 							<div class="exp-lbl-line">
@@ -253,10 +256,6 @@
 				</div><!-- /exploded-scene -->
 
 				<canvas id="heatCanvas"></canvas>
-				<div id="calcBox">
-					<div class="cb-title">Junction Temperature</div>
-					<div class="cb-formula" id="cbFormula"></div>
-				</div>
 
 			</div><!-- /viewport -->
 

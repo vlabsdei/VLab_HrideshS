@@ -967,60 +967,30 @@ input[type=range]:hover::-webkit-slider-thumb {
 }
 
 /* ══════════════════════════════════════
-   CALCULATION OVERLAY
+   CALCULATION PANEL
 ══════════════════════════════════════ */
 #calcBox {
-    position: absolute;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, .97);
-    border: 1.5px solid var(--border2);
-    border-radius: var(--r);
-    padding: 16px 20px;
-    box-shadow: var(--shadow-lg);
-    min-width: 290px;
-    max-width: 90vw;
-    display: none;
-    z-index: 40;
-    backdrop-filter: blur(8px)
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .35s ease, opacity .25s ease;
+    opacity: 0;
 }
 
 #calcBox.show {
-    display: block;
-    animation: slideup .3s ease
-}
-
-@keyframes slideup {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(12px)
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0)
-    }
-}
-
-.cb-title {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    color: var(--blue);
-    margin-bottom: 10px
+    max-height: 250px;
+    opacity: 1;
 }
 
 .cb-formula {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    color: var(--t1);
     background: var(--bg3);
-    padding: 10px 14px;
-    border-radius: var(--r-sm);
     border: 1px solid var(--border);
-    line-height: 2
+    border-radius: var(--r-sm);
+    padding: 10px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--t1);
+    line-height: 1.9;
+    margin-top: 8px;
 }
 
 /* ══════════════════════════════════════

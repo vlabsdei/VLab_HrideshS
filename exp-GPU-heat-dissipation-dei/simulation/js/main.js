@@ -142,10 +142,10 @@ const afCtx = document.getElementById('airflowCanvas').getContext('2d');
 let streamlines = [];
 function initStreamlines() {
     streamlines = [];
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < 35; i++) {
         streamlines.push({
             x: Math.random() * 420,
-            y: 4 + Math.random() * 48,
+            y: Math.random() * -20,
             speed: 0,
             alpha: 0,
             wo: Math.random() * Math.PI * 2
@@ -161,16 +161,16 @@ function drawAirflow(rpm, dt) {
     if (speed < 0.02) return;
     streamlines.forEach(sl => {
         sl.speed = speed * (1.2 + Math.random() * 0.5);
-        sl.x += sl.speed * 55 * dt;
+        sl.y += sl.speed * 65 * dt;
         sl.alpha = Math.min(speed * 0.8, sl.alpha + dt * 1.8);
-        if (sl.x > 435) { sl.x = Math.random() * -30; sl.y = 4 + Math.random() * 48; sl.alpha = 0; }
+        if (sl.y > 60) { sl.y = Math.random() * -30 - 10; sl.x = Math.random() * 420; sl.alpha = 0; }
         ac.save();
         ac.globalAlpha = sl.alpha;
         ac.beginPath();
         const wavAmp = 1.5 + speed * 4;
         ac.moveTo(sl.x, sl.y);
-        for (let dx = 0; dx <= 26; dx += 2) {
-            ac.lineTo(sl.x + dx, sl.y + Math.sin((sl.x + dx) * 0.11 + sl.wo + sl.speed * 2) * wavAmp);
+        for (let dy = 0; dy <= 26; dy += 2) {
+            ac.lineTo(sl.x + Math.sin((sl.y + dy) * 0.11 + sl.wo + sl.speed * 2) * wavAmp, sl.y + dy);
         }
         ac.strokeStyle = `rgba(96,165,250,${0.45 + speed * 0.35})`;
         ac.lineWidth = 0.9 + speed * 0.6;

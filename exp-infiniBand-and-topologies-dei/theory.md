@@ -43,7 +43,7 @@ Key properties:
 - **High bisection bandwidth**: Full bandwidth between any two halves of the network
 - **High cabling cost**: Requires many switch-to-switch connections
 
-> [!NOTE]
+
 > **Note on Fat-Tree Hop-Count**: For simplicity, this simulator models a fixed 4-hop path (Node A → Leaf Switch → Spine Switch → Leaf Switch → Node B) representing a traditional cluster-wide traverse. In actual multi-tier Fat-Tree networks, the hop count can vary depending on whether the communication is local to the same leaf switch (2 hops) or requires traversing higher network layers (e.g., 6 hops in a 3-tier tree).
 
 ### 3.2 3D Torus
@@ -58,8 +58,7 @@ Key properties:
 - **Lower cabling cost**: Each node has a fixed number of connections
 - **Higher latency at scale**: Large clusters have many routing hops
 
-> [!NOTE]
-> **Note on Hop-Count Approximation**: In this educational simulator, the average hop count for a 3D Torus is approximated as <i>H = &lfloor;&#179;&radic;N&rfloor;</i> to illustrate the <i>O(&#179;&radic;N)</i> scaling behavior. In production InfiniBand networks, the exact average hop count depends on the specific routing algorithm (e.g., Dimension-Order Routing), topology dimensions (e.g., <i>X &times; Y &times; Z</i>), and traffic patterns (which typically average <i>&approx; &frac34; N<sup>1/3</sup></i> for a symmetric torus).
+ > **Note on Hop-Count Approximation**: In this educational simulator, the average hop count for a 3D Torus is approximated as <i>H = &lfloor;&#179;&radic;N&rfloor;</i> to illustrate the <i>O(&#179;&radic;N)</i> scaling behavior. In production InfiniBand networks, the exact average hop count depends on the specific routing algorithm (e.g., Dimension-Order Routing), topology dimensions (e.g., <i>X &times; Y &times; Z</i>), and traffic patterns (which typically average <i>&approx; &frac34; N<sup>1/3</sup></i> for a symmetric torus).
 
 ---
 
