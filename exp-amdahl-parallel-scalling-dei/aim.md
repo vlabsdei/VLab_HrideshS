@@ -1,1 +1,1 @@
-### To analyze the theoretical limits of parallel speedup as defined by Amdahl's Law, and to investigate how the parallelizable fraction, number of computing nodes, and communication overhead determine the point of diminishing returns and wasted infrastructure expenditure in GPU clusters.
+### To analyze how the parallelizable fraction, node count, and communication overhead limit parallel speedup and cause diminishing returns in GPU clusters.

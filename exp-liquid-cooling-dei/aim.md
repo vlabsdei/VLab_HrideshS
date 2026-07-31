@@ -1,1 +1,1 @@
-### To investigate the relationship between coolant mass flow rate, inlet water temperature, and GPU heat load on outlet water temperature, thermal resistance, and cluster water consumption in a liquid-cooled data center environment.
+### To investigate how coolant flow rate, inlet temperature, and GPU heat load affect cooling efficiency and water consumption in a liquid-cooled data center.

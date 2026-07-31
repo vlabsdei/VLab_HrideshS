@@ -1,1 +1,1 @@
-### To analyze the thermal dissipation characteristics of a GPU die and the impact of thermal throttling on compute performance in a data center environment.
+### To understand how a GPU generates and dissipates heat, and how high temperatures cause thermal throttling that reduces compute performance.

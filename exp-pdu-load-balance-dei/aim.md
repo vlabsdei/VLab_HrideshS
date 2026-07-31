@@ -1,1 +1,1 @@
-### To analyze the effects of unbalanced phase currents and phase angle deviations on neutral return current, power delivery status, and breaker trip conditions in a three-phase power distribution unit (PDU) used in data center racks.
+### To analyze how unbalanced currents and phase shifts affect neutral return current, power delivery, and breaker trips in a three-phase Power Distribution Unit (PDU).

@@ -1,1 +1,1 @@
-### To compare the average job wait time, cluster GPU utilization, and wasted compute tokens across FIFO, Shortest Job First (SJF), and Fair-Share Priority scheduling algorithms under varying workload mixes and preemption eviction protocols in GPU cluster environments.
+### To compare average wait time, GPU utilization, and wasted compute across FIFO, Shortest Job First, and Fair-Share scheduling algorithms using different preemption strategies.

@@ -1,1 +1,1 @@
-### To compare the data transfer latency, total step iteration duration, and GPU operational utilization across PCIe Gen4, PCIe Gen5, and NVLink interconnect standards for batch tensor workloads of varying sizes.
+### To compare data transfer latency and GPU utilization across PCIe Gen4, PCIe Gen5, and NVLink interconnects for different AI workload sizes.

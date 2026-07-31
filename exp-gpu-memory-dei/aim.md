@@ -1,1 +1,1 @@
-### To investigate the relationship between model parameter count, quantization bit-width, context length, and batch size on VRAM allocation requirements and deployment feasibility of Large Language Models (LLMs) on GPU accelerators.
+### To understand how model size, quantization, context length, and batch size affect the GPU memory (VRAM) required to run Large Language Models.
